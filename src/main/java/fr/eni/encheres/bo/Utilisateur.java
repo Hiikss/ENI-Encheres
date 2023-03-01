@@ -1,5 +1,7 @@
 package fr.eni.encheres.bo;
 
+import java.util.List;
+
 public class Utilisateur {
 	private int noUtilisateur;
 	private String pseudo;
@@ -13,7 +15,7 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	
-	private ArticleVendu vend;
+	private List<ArticleVendu> vente;
 	private Enchere encherit;
 	
 	private int administrateur;
