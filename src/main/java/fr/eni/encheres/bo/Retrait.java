@@ -1,21 +1,35 @@
 package fr.eni.encheres.bo;
 
+import java.util.List;
+
 public class Retrait {
 	private String rue;
 	private String code_postal;
 	private String ville;
+	private List<ArticleVendu> article;
 	
 	
 	public Retrait() {
 		super();
 	}
 	
-	public Retrait(String rue, String code_postal, String ville) {
+	
+
+	/**
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @param article
+	 */
+	public Retrait(String rue, String code_postal, String ville, List<ArticleVendu> article) {
 		super();
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
+		this.article = article;
 	}
+
+
 
 	public String getRue() {
 		return rue;
@@ -40,11 +54,29 @@ public class Retrait {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
+	
+
+	public List<ArticleVendu> getArticle() {
+		return article;
+	}
+
+
+
+	public void setArticle(List<ArticleVendu> article) {
+		this.article = article;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + "]";
+		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + ", article=" + article
+				+ "]";
 	}
+
+
+
+	
 	
 	
 	
