@@ -12,6 +12,11 @@ public class BusinessException extends Exception {
 		this.listeCodesErreur=new ArrayList<>();
 	}
 	
+	public BusinessException(int code) {
+		this();
+		ajouterErreur(code);
+	}
+	
 	public void ajouterErreur(int code)
 	{
 		if(!this.listeCodesErreur.contains(code))

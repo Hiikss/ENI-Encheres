@@ -9,5 +9,7 @@ public abstract class CodesResultatDAL {
 		public static final int INSERT_UTILISATEUR_ECHEC=10002;
 		
 		public static final int SE_CONNECTER_UTILISATEUR_ECHEC=10003;
+
+		public static final int UTILISATEUR_NULL = 10004;
 }
 
