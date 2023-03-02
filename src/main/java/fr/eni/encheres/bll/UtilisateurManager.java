@@ -16,7 +16,7 @@ public class UtilisateurManager {
 	public Utilisateur seConnecter(String identifiant, String mdp) {
 		
 		Utilisateur utilisateur = new Utilisateur();
-		if(identifiant.contains('@'))
+		if(identifiant.contains("@"))
 			utilisateur.setEmail(identifiant);
 		else
 			utilisateur.setPseudo(identifiant);
