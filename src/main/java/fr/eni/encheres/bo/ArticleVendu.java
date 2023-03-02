@@ -1,6 +1,7 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleVendu {
@@ -25,7 +26,8 @@ public class ArticleVendu {
 	 * 
 	 */
 	public ArticleVendu() {
-		super();
+		enchere = new ArrayList<>();
+		
 	}
 		
 	
@@ -59,6 +61,7 @@ public class ArticleVendu {
 		this.lieuRetrait = lieuRetrait;
 		this.categorieArticle = categorieArticle;
 		this.enchere = enchere;
+		enchere = new ArrayList<>();
 	}
 	
 	
@@ -92,6 +95,7 @@ public class ArticleVendu {
 		this.lieuRetrait = lieuRetrait;
 		this.categorieArticle = categorieArticle;
 		this.enchere = enchere;
+		enchere = new ArrayList<>();
 	}
 
 

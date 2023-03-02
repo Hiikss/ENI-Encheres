@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utilisateur {
@@ -21,7 +22,8 @@ public class Utilisateur {
 	private boolean administrateur;
 
 	public Utilisateur() {
-		super();
+		vente = new ArrayList<>();
+		encherit = new ArrayList<>();
 	}
 
 	/**
@@ -56,6 +58,8 @@ public class Utilisateur {
 		this.credit = credit;
 		this.vente = vente;
 		this.encherit = encherit;
+		vente = new ArrayList<>();
+		encherit = new ArrayList<>();
 	}
 
 	/**
@@ -88,6 +92,8 @@ public class Utilisateur {
 		this.credit = credit;
 		this.vente = vente;
 		this.encherit = encherit;
+		vente = new ArrayList<>();
+		encherit = new ArrayList<>();
 	}
 
 	public int getNoUtilisateur() {

@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Retrait {
@@ -10,7 +11,7 @@ public class Retrait {
 	
 	
 	public Retrait() {
-		super();
+		article = new ArrayList<>();
 	}
 	
 	
@@ -27,6 +28,7 @@ public class Retrait {
 		this.code_postal = code_postal;
 		this.ville = ville;
 		this.article = article;
+		article = new ArrayList<>();
 	}
 
 

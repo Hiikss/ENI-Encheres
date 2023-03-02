@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Categorie {
@@ -9,7 +10,7 @@ public class Categorie {
 	
 	
 	public Categorie() {
-		super();
+		article = new ArrayList<>();
 	}
 	
 	
@@ -23,6 +24,7 @@ public class Categorie {
 		super();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
+		article = new ArrayList<>();
 	}
 
 
@@ -38,6 +40,7 @@ public class Categorie {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.article = article;
+		article = new ArrayList<>();
 	}
 
 
