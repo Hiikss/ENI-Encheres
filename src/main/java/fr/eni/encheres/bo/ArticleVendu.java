@@ -13,6 +13,7 @@ public class ArticleVendu {
 	//etatVente en String ?
 	private String etatVente;
 	
+	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
 	private Categorie categorieArticle;
 
