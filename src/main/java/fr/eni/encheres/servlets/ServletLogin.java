@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
+import fr.eni.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletLogin
@@ -32,6 +34,7 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String identifiant = null;
 		String mdp = null;
 		
@@ -41,13 +44,15 @@ public class ServletLogin extends HttpServlet {
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
 		try {
-			utilisateurManager.seConnecter(identifiant, mdp);
-			RequestDispatcher rd = request.getRequestDispatcher("/accueil");
-			rd.forward(request, response);
+			Utilisateur utilisateur = utilisateurManager.seConnecter(identifiant, mdp);
+			session.setAttribute("utilisateur", utilisateur);
+			response.sendRedirect(request.getContextPath() + "/accueil");
 		} catch (BusinessException e) {
 			e.printStackTrace();
+			request.setAttribute("listeErreurs", e.getListeCodesErreur());
+			doGet(request, response);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 }
