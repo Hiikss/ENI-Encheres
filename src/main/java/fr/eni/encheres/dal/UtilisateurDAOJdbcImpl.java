@@ -14,9 +14,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
-			throw businessException;
+			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -39,19 +37,14 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_UTILISATEUR_ECHEC);
-			throw businessException;
+			throw new BusinessException(CodesResultatDAL.INSERT_UTILISATEUR_ECHEC);
 		}
 	}
 
 	@Override
 	public void seConnecter(Utilisateur utilisateur) throws BusinessException{
-		if(utilisateur==null)
-		{
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SE_CONNECTER_UTILISATEUR_ECHEC);
-			throw businessException;
+		if(utilisateur==null) {
+			throw new BusinessException(CodesResultatDAL.UTILISATEUR_NULL);
 		}	
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SE_CONNECTER);
@@ -61,8 +54,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-				if(utilisateur.getPseudo()==null)
-				{
+				if(utilisateur.getPseudo()==null) {
 					utilisateur.setPseudo(rs.getString("Pseudo"));
 				}
 				else {
@@ -78,39 +70,33 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur.setAdministrateur(rs.getBoolean("Administrateur"));
 				System.out.println(utilisateur.toString());
 			}
+			else {
+				throw new BusinessException(CodesResultatDAL.SE_CONNECTER_UTILISATEUR_ECHEC);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SE_CONNECTER_UTILISATEUR_ECHEC);
-			throw businessException;
+			throw new BusinessException(CodesResultatDAL.SE_CONNECTER_UTILISATEUR_ECHEC);
 		}
 	}
 	
 	@Override
 	public void update(Utilisateur utilisateur) throws BusinessException{
-			if(utilisateur==null)
-			{
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
-				throw businessException;
+			if(utilisateur==null) {
+				throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 			}
 	}
 
 	@Override
 	public void delete(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
-			throw businessException;
+			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
 	}
 
 	@Override
 	public void selectbyId(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
-			throw businessException;
+			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
 
 	}
