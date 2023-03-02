@@ -1,8 +1,11 @@
 package fr.eni.encheres.bo;
 
+import java.util.List;
+
 public class Categorie {
 	private int noCategorie;
 	private String libelle;
+	private List<ArticleVendu> article;
 	
 	
 	public Categorie() {
@@ -10,11 +13,35 @@ public class Categorie {
 	}
 	
 	
+
+
+	/**
+	 * @param noCategorie
+	 * @param libelle
+	 */
 	public Categorie(int noCategorie, String libelle) {
 		super();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
+
+
+
+
+	/**
+	 * @param noCategorie
+	 * @param libelle
+	 * @param article
+	 */
+	public Categorie(int noCategorie, String libelle, List<ArticleVendu> article) {
+		super();
+		this.noCategorie = noCategorie;
+		this.libelle = libelle;
+		this.article = article;
+	}
+
+
+
 
 
 	public int getNoCategorie() {
@@ -35,12 +62,33 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
+	
+
+
+	public List<ArticleVendu> getArticle() {
+		return article;
+	}
+
+
+
+
+	public void setArticle(List<ArticleVendu> article) {
+		this.article = article;
+	}
+
+
 
 
 	@Override
 	public String toString() {
-		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
+		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + ", article=" + article + "]";
 	}
+
+
+
+
+	
 	
 	
 	
