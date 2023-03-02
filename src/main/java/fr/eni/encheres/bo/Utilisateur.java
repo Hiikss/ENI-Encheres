@@ -13,7 +13,7 @@ public class Utilisateur {
 	private String rue;
 	private String codePostal;
 	private String ville;
-	private String motDePasse;
+	private byte[] motDePasse;
 	private int credit;
 	
 	private List<ArticleVendu> vente;
@@ -43,7 +43,7 @@ public class Utilisateur {
 	 * @param administrateur
 	 */
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -77,7 +77,7 @@ public class Utilisateur {
 	 * @param encherit
 	 */
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, List<ArticleVendu> vente,
+			String rue, String codePostal, String ville, byte[] motDePasse, int credit, List<ArticleVendu> vente,
 			List<Enchere> encherit) {
 		super();
 		this.noUtilisateur = noUtilisateur;
@@ -112,7 +112,7 @@ public class Utilisateur {
 	 * @param encherit
 	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, int credit, List<ArticleVendu> vente,
+			String codePostal, String ville, byte[] motDePasse, int credit, List<ArticleVendu> vente,
 			List<Enchere> encherit) {
 		super();
 		this.pseudo = pseudo;
@@ -203,11 +203,11 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
-	public String getMotDePasse() {
+	public byte[] getMotDePasse() {
 		return motDePasse;
 	}
 
-	public void setMotDePasse(String motDePasse) {
+	public void setMotDePasse(byte[] motDePasse) {
 		this.motDePasse = motDePasse;
 	}
 

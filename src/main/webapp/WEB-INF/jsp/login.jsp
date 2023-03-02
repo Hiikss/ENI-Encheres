@@ -16,13 +16,13 @@
   		<div class="form-group row justify-content-center">
     		<label for="identifiant" class="col-2 col-form-label ">Identifiant :</label>
     		<div class="col-3">
-    			<input class="form-control" id="identifiant" required>
+    			<input class="form-control" id="identifiant" name="identifiant" required>
     		</div>
   		</div>
  		 <div class="form-group row justify-content-center">
     		<label for="motDePasse" class="col-2 col-form-label">Mot de passe :</label>
     		<div class="col-3">
-   				<input type="password" class="form-control" id="motDePasse" required>
+   				<input type="password" class="form-control" id="motDePasse" name="motDePasse" required>
    			</div>
   		</div>
   		<div class="row justify-content-center mt-4">
