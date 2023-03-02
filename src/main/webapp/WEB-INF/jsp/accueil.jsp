@@ -8,13 +8,14 @@
 <title>Accueil</title>
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
-  <a href="." class="navbar-brand">ENI-Encheres</a>
-  <span class="navbar-text">
-  	<a href="<%=request.getContextPath()%>/login">Se connecter</a>
-  	|
-  	<a href="<%=request.getContextPath()%>/signup">S'inscrire</a>
-  </span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a href="." class="navbar-brand">ENI-Encheres</a>
+  	<div class="collapse navbar-collapse" id="navbarNav">
+		<div class="navbar-nav ml-auto">
+        	<a class="nav-link" href="<%=request.getContextPath()%>/login">Se connecter</a>
+        	<a class="nav-link" href="<%=request.getContextPath()%>/signup">S'inscrire</a>
+        </div>
+	</div>
 </nav>
 </body>
 </html>
