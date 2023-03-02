@@ -1,6 +1,7 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ArticleVendu {
 	private int noArticle;
@@ -10,12 +11,13 @@ public class ArticleVendu {
 	private LocalDate dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
-	//etatVente en String ?
+	//etatVente en String ? On pourrait faire une enum ?
 	private String etatVente;
 	
 	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
 	private Categorie categorieArticle;
+	private List<Enchere> enchere;
 	
 	
 	
@@ -25,6 +27,8 @@ public class ArticleVendu {
 	public ArticleVendu() {
 		super();
 	}
+		
+	
 	/**
 	 * @param noArticle
 	 * @param nomArticle
@@ -37,10 +41,11 @@ public class ArticleVendu {
 	 * @param vendeur
 	 * @param lieuRetrait
 	 * @param categorieArticle
+	 * @param enchere
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Utilisateur vendeur,
-			Retrait lieuRetrait, Categorie categorieArticle) {
+			Retrait lieuRetrait, Categorie categorieArticle, List<Enchere> enchere) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -53,7 +58,12 @@ public class ArticleVendu {
 		this.vendeur = vendeur;
 		this.lieuRetrait = lieuRetrait;
 		this.categorieArticle = categorieArticle;
+		this.enchere = enchere;
 	}
+	
+	
+	
+	
 	/**
 	 * @param nomArticle
 	 * @param description
@@ -65,10 +75,11 @@ public class ArticleVendu {
 	 * @param vendeur
 	 * @param lieuRetrait
 	 * @param categorieArticle
+	 * @param enchere
 	 */
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 			int miseAPrix, int prixVente, String etatVente, Utilisateur vendeur, Retrait lieuRetrait,
-			Categorie categorieArticle) {
+			Categorie categorieArticle, List<Enchere> enchere) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -80,11 +91,12 @@ public class ArticleVendu {
 		this.vendeur = vendeur;
 		this.lieuRetrait = lieuRetrait;
 		this.categorieArticle = categorieArticle;
+		this.enchere = enchere;
 	}
-	
-	
-	
-	
+
+
+
+
 	public int getNoArticle() {
 		return noArticle;
 	}
@@ -151,13 +163,30 @@ public class ArticleVendu {
 	public void setCategorieArticle(Categorie categorieArticle) {
 		this.categorieArticle = categorieArticle;
 	}
+	
+	
+	
+	public List<Enchere> getEnchere() {
+		return enchere;
+	}
+
+
+	public void setEnchere(List<Enchere> enchere) {
+		this.enchere = enchere;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", vendeur=" + vendeur
-				+ ", lieuRetrait=" + lieuRetrait + ", categorieArticle=" + categorieArticle + "]";
+				+ ", lieuRetrait=" + lieuRetrait + ", categorieArticle=" + categorieArticle + ", enchere=" + enchere
+				+ "]";
 	}
+
+
+	
 	
 	
 	
