@@ -12,6 +12,7 @@
 	<a href="<%=request.getContextPath()%>/accueil" class="navbar-brand">ENI-Encheres</a>
 </nav>
 <section class="container">
+<%@ include file="/WEB-INF/jsp/bandeauErreur.jspf" %>
 	<form action="<%=request.getContextPath()%>/login" method="post" class="mt-5">
   		<div class="form-group row justify-content-center">
     		<label for="identifiant" class="col-2 col-form-label ">Identifiant :</label>
