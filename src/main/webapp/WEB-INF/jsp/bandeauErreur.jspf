@@ -1,0 +1,18 @@
+<%@page import="java.util.List"%>
+<%@page import="fr.eni.encheres.messages.LecteurMessage"%>
+<%
+		List<Integer> listeErreurs = (List<Integer>) request.getAttribute("listeErreurs");
+		if(listeErreurs!=null) {
+	%>
+			<div class="alert alert-danger text-center col-8 offset-2 mt-5" role="alert">
+				<p>Une erreur est survenue :</p>
+	<%
+			for(int erreur:listeErreurs)
+			{
+	%>
+				<p><%=LecteurMessage.getMessageErreur(erreur)%></p>
+	<%				
+			}
+		}
+	%>
+		</div>
