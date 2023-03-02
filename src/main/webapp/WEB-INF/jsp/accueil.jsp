@@ -12,8 +12,24 @@
 	<a href="." class="navbar-brand">ENI-Encheres</a>
   	<div class="collapse navbar-collapse" id="navbarNav">
 		<div class="navbar-nav ml-auto">
+		<%
+			if(session.getAttribute("utilisateur")==null)
+			{
+		%>
         	<a class="nav-link" href="<%=request.getContextPath()%>/login">Se connecter</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/signup">S'inscrire</a>
+        <%
+			}
+			else {
+        %>
+        	<a class="nav-link" href=".">Enchères</a>
+        	<a class="nav-link" href=".">Vendre un article</a>
+        	<a class="nav-link" href=".">Mon profil</a>
+        	<a class="nav-link" href="<%=request.getContextPath()%>/logout">Déconnexion</a>
+        <%
+			}
+        %>
+        
         </div>
 	</div>
 </nav>
