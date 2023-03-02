@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.UtilisateurManager;
+
 /**
  * Servlet implementation class ServletLogin
  */
@@ -28,7 +30,18 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String identifiant = null;
+		String mdp = null;
+		
+		identifiant = request.getParameter("utilisateur");
+		
+		mdp = request.getParameter("motDePasse");
+		
+		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
+		utilisateurManager.seConnecter(identifiant, mdp);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/accueil");
+		rd.forward(request, response);
 	}
 
 }
