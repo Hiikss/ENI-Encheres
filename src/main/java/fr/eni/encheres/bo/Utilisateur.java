@@ -19,7 +19,7 @@ public class Utilisateur {
 	private List<ArticleVendu> vente;
 	private List<Enchere> encherit;
 	
-	private boolean administrateur = false;
+	private boolean administrateur;
 
 	public Utilisateur() {
 		vente = new ArrayList<>();
