@@ -1,6 +1,9 @@
 package fr.eni.encheres.servlets;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.tribes.util.Arrays;
 
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
@@ -35,6 +40,7 @@ public class ServletSignUp extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		//Récupération des paramètres
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -43,18 +49,26 @@ public class ServletSignUp extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		String motDePasse = request.getParameter("motDePasse");
-		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
-		List<Integer> listeErreurs = new ArrayList<>();
+		//hashage du mot de passe
+		MessageDigest digest = null;
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		byte[] motDePasse = digest.digest(request.getParameter("motDePasse").getBytes(StandardCharsets.UTF_8));
+		byte[] confirmationMotDePasse = digest.digest(request.getParameter("confirmationMotDePasse").getBytes(StandardCharsets.UTF_8));
 		
+		List<Integer> listeErreurs = new ArrayList<>();
+		//Vérifie que le pseudo ne contient que des caractères alphanumériques
 		if(!pseudo.matches("[^a-zA-Z0-9]")) {
 			listeErreurs.add(CodesResultatServlets.FORMAT_PSEUDO_ERREUR);
 		}
-		
-		if(motDePasse != confirmationMotDePasse) {
+		//Vérifie que les mots de passe sont égaux
+		if(!Arrays.equals(motDePasse, confirmationMotDePasse)) {
 			listeErreurs.add(CodesResultatServlets.MDP_DIFFERENTS_ERREUR);
 		}
-		
+		//S'il y a des erreurs, renvoie la page d'inscription avec les erreurs
 		if(listeErreurs.size()>0) {
 			request.setAttribute("listeErreurs", listeErreurs);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp");

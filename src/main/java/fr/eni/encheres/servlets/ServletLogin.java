@@ -45,7 +45,7 @@ public class ServletLogin extends HttpServlet {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		byte[] mdp = (digest.digest(request.getParameter("motDePasse").getBytes(StandardCharsets.UTF_8)));
+		byte[] mdp = digest.digest(request.getParameter("motDePasse").getBytes(StandardCharsets.UTF_8));
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
 		try {
