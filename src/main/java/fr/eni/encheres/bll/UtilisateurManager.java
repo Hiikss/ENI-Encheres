@@ -53,6 +53,7 @@ public class UtilisateurManager {
 		this.validerPseudo(pseudo, exception);
 		this.validerEmail(email, exception);
 		this.validerMotDePasse(motDePasse, exception);
+		this.validerCoordonne(nom, prenom, telephone, rue, codePostal, ville, exception);
 		
 		if(!exception.hasErreurs()) {
 			
@@ -112,7 +113,7 @@ public class UtilisateurManager {
 	
 	private void validerMotDePasse(byte[] motDePasse, BusinessException businessException) {
 		CharSequence mdp = new String(motDePasse);
-		if (!PASSWORD_PATTERN.matcher(mdp).matches()) {
+		if (!PASSWORD_PATTERN.matcher(mdp).matches() || mdp == null || mdp.isEmpty()) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOT_DE_PASSE_ERREUR);
         }
 		
@@ -138,6 +139,31 @@ public class UtilisateurManager {
 	    	businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO_ERREUR);
 	    }
 	
-}
+	}
+	
+	private void validerCoordonne(String nom, String prenom, String telephone, String rue, String codePostal, String ville,BusinessException businessException) {
+		if(nom == null || nom.isBlank()){
+            businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_NOM_ERREUR);
+        }
+
+        if (prenom == null || prenom.isBlank()){
+            businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_PRENOM_ERREUR);
+        }
+
+
+        
+
+        if (rue == null || rue.isBlank()){
+            businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_RUE_ERREUR);
+        }
+
+        if (codePostal == null || codePostal.isBlank()){
+            businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_CODEPOSTAL_ERREUR);
+        }
+
+        if (ville == null || ville.isBlank()){
+            businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_VILLE_ERREUR);
+        }
+	}
 	
 }
