@@ -12,6 +12,13 @@ import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
+	
+	// Mot de passe de 4 à 8 caractères nécessitant des chiffres et des alphabets des deux cas
+    private static final String PASSWORD_REGEX =
+            "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$";
+    
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile(PASSWORD_REGEX);
 
 	private UtilisateurDAO utilisateurDAO;
 	
@@ -104,6 +111,10 @@ public class UtilisateurManager {
 	
 	
 	private void validerMotDePasse(byte[] motDePasse, BusinessException businessException) {
+		CharSequence mdp = new String(motDePasse);
+		if (!PASSWORD_PATTERN.matcher(mdp).matches()) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOT_DE_PASSE_ERREUR);
+        }
 		
 	}
 
