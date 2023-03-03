@@ -34,4 +34,42 @@ public class UtilisateurManager {
 		System.out.println(utilisateur.toString());
 		return utilisateur;
 	}
+	
+	
+	public Utilisateur Insert(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) {
+		BusinessException exception = new BusinessException();
+		credit = 100;
+		administrateur =false;
+		Utilisateur utilisateur = null;
+		this.validerPseudo(pseudo, exception);
+		this.validerEmail(email, exception);
+		this.validerMotDePasse(motDePasse, exception);
+		
+		if(!exception.hasErreurs()) {
+			
+			utilisateur = new Utilisateur();
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setEmail(email);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setRue(rue);
+			utilisateur.setVille(ville);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setMotDePasse(motDePasse);
+			utilisateur.setCredit(credit);
+			utilisateur.setAdministrateur(administrateur);
+		
+		this.utilisateurDAO.insert(utilisateur);
+			}
+		else
+			{
+				throw exception;
+			}
+		
+		return utilisateur;
+	}
+	
+	
+	
 }
