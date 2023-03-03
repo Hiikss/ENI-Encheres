@@ -42,7 +42,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void seConnecter(Utilisateur utilisateur) throws BusinessException{
+	public Utilisateur seConnecter(Utilisateur utilisateur) throws BusinessException{
 		if(utilisateur==null) {
 			throw new BusinessException(CodesResultatDAL.UTILISATEUR_NULL);
 		}	
@@ -68,7 +68,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur.setVille(rs.getString("Ville"));
 				utilisateur.setCredit(rs.getInt("Credit"));
 				utilisateur.setAdministrateur(rs.getBoolean("Administrateur"));
-				System.out.println(utilisateur.toString());
+		
 			}
 			else {
 				throw new BusinessException(CodesResultatDAL.SE_CONNECTER_UTILISATEUR_ECHEC);
@@ -77,6 +77,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			e.printStackTrace();
 			throw new BusinessException(CodesResultatDAL.SE_CONNECTER_UTILISATEUR_ECHEC);
 		}
+		return utilisateur;
 	}
 	
 	@Override

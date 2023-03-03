@@ -7,9 +7,9 @@ import fr.eni.encheres.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 	
-	public void insert (Utilisateur utilisateur) throws BusinessException;
+	 void insert (Utilisateur utilisateur) throws BusinessException;
 	
-	public void seConnecter (Utilisateur utilisateur)throws BusinessException;
+	Utilisateur seConnecter (Utilisateur utilisateur)throws BusinessException;
 
 	void update(Utilisateur utilisateur) throws BusinessException;
 
