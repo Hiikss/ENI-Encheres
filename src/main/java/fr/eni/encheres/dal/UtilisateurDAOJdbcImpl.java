@@ -8,6 +8,8 @@ import fr.eni.encheres.bo.Utilisateur;
 
 class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
+	private static final String SELECT_PSEUDO = "SELECT * FROM Utilisateurs WHERE pseudo=?";
+	private static final String SELECT_EMAIL = "SELECT * FROM Utilisateurs WHERE email=?";
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
 	
@@ -16,24 +18,58 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		if (utilisateur == null) {
 			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
-
+		
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			BusinessException be = new BusinessException();
+			//Test si le pseudo existe déjà
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_PSEUDO);
 			pstmt.setString(1, utilisateur.getPseudo());
-			pstmt.setString(2, utilisateur.getNom());
-			pstmt.setString(3, utilisateur.getPrenom());
-			pstmt.setString(4, utilisateur.getEmail());
-			pstmt.setString(5, utilisateur.getTelephone());
-			pstmt.setString(6, utilisateur.getRue());
-			pstmt.setString(7, utilisateur.getCodePostal());
-			pstmt.setString(8, utilisateur.getVille());
-			pstmt.setBytes(9, utilisateur.getMotDePasse());
-			pstmt.setInt(10, utilisateur.getCredit());
-			pstmt.setBoolean(11, utilisateur.isAdministrateur());
-			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
-			if (rs.next()) {
-				utilisateur.setNoUtilisateur(rs.getInt(1));
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				be.ajouterErreur(CodesResultatDAL.INSERT_UTILISATEUR_PSEUDO_ECHEC);
+			}
+			if(rs != null) {
+				rs.close();
+			}
+			if(pstmt != null) {
+				pstmt.close();
+			}
+			//Test si l'email existe déjà
+			pstmt = cnx.prepareStatement(SELECT_EMAIL);
+			pstmt.setString(1, utilisateur.getEmail());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				be.ajouterErreur(CodesResultatDAL.INSERT_UTILISATEUR_EMAIL_ECHEC);
+			}
+			if(rs != null) {
+				rs.close();
+			}
+			if(pstmt != null) {
+				pstmt.close();
+			}
+			//Si le pseudo et/ou l'email existent déjà, ça lance une erreur
+			if(be.hasErreurs()) {
+				throw be;
+			}
+			//Sinon on créer l'utilisateur
+			else {
+				pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+				pstmt.setString(1, utilisateur.getPseudo());
+				pstmt.setString(2, utilisateur.getNom());
+				pstmt.setString(3, utilisateur.getPrenom());
+				pstmt.setString(4, utilisateur.getEmail());
+				pstmt.setString(5, utilisateur.getTelephone());
+				pstmt.setString(6, utilisateur.getRue());
+				pstmt.setString(7, utilisateur.getCodePostal());
+				pstmt.setString(8, utilisateur.getVille());
+				pstmt.setBytes(9, utilisateur.getMotDePasse());
+				pstmt.setInt(10, utilisateur.getCredit());
+				pstmt.setBoolean(11, utilisateur.isAdministrateur());
+				pstmt.executeUpdate();
+				rs = pstmt.getGeneratedKeys();
+				if(rs.next()) {
+					utilisateur.setNoUtilisateur(rs.getInt(1));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
