@@ -1,9 +1,5 @@
 package fr.eni.encheres.bll;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DAOFactory;
@@ -18,7 +14,7 @@ public class UtilisateurManager {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 	
-	public Utilisateur seConnecter(String identifiant, String mdp) throws BusinessException, NoSuchAlgorithmException {
+	public Utilisateur seConnecter(String identifiant, byte[] mdp) throws BusinessException {
 		
 		Utilisateur utilisateur = new Utilisateur();
 		if(identifiant.contains("@"))
@@ -26,8 +22,7 @@ public class UtilisateurManager {
 		else
 			utilisateur.setPseudo(identifiant);
 		
-		MessageDigest digest = MessageDigest.getInstance("SHA-256");
-		utilisateur.setMotDePasse(digest.digest(mdp.getBytes(StandardCharsets.UTF_8)));
+		utilisateur.setMotDePasse(mdp);
 		
 		this.utilisateurDAO.seConnecter(utilisateur);
 		

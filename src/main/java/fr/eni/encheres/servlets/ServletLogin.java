@@ -1,6 +1,8 @@
 package fr.eni.encheres.servlets;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
@@ -36,7 +38,14 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String identifiant = request.getParameter("identifiant");
-		String mdp = request.getParameter("motDePasse");
+		//hashage du mot de passe
+		MessageDigest digest = null;
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		byte[] mdp = (digest.digest(request.getParameter("motDePasse").getBytes(StandardCharsets.UTF_8)));
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
 		try {
@@ -47,8 +56,6 @@ public class ServletLogin extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("listeErreurs", e.getListeCodesErreur());
 			doGet(request, response);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
 		} 
 	}
 }
