@@ -3,6 +3,8 @@ package fr.eni.encheres.bll;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
@@ -36,7 +38,7 @@ public class UtilisateurManager {
 	}
 	
 	
-	public Utilisateur Insert(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) {
+	public Utilisateur Insert(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) throws BusinessException {
 		BusinessException exception = new BusinessException();
 		credit = 100;
 		administrateur =false;
@@ -70,6 +72,61 @@ public class UtilisateurManager {
 		return utilisateur;
 	}
 	
+	private void validerEmail(String email, BusinessException businessException) {
+		boolean result;
+	    // Vérifier si l'email est nul ou vide
+	    if (email == null || email.isEmpty()) {
+	        result= false;
+	    }
+	    
+	    // Vérifier si l'email contient un "@" et un "."
+	    if (!email.contains("@") || !email.contains(".")) {
+	    	result= false;
+	    }
+	    
+	    // Vérifier si l'email commence ou finit par un "."
+	    if (email.startsWith(".") || email.endsWith(".")) {
+	    	result= false;
+	    }
+	    
+	    // Vérifier si l'email contient des caractères spéciaux invalides
+	    String regex = "[^a-zA-Z0-9.@_-]";
+	    Pattern pattern = Pattern.compile(regex);
+	    Matcher matcher = pattern.matcher(email);
+	    if (matcher.find()) {
+	    	result= false;
+	    }
+	    
+	    if(result = false) {
+	    	businessException.ajouterErreur(CodesResultatBLL.REGLE_EMAIL_ERREUR);
+	    }
+	}
 	
+	
+	private void validerMotDePasse(byte[] motDePasse, BusinessException businessException) {
+		
+	}
+
+	private void validerPseudo(String pseudo, BusinessException businessException) {
+		boolean result;
+	    // Vérifier si le pseudo est nul ou vide
+	    if (pseudo == null || pseudo.isEmpty()) {
+	        result= false;
+	    }
+	    
+	    
+	    // Vérifier si le pseudo contient des caractères spéciaux invalides
+	    String regex = "[^a-zA-Z0-9.@_-]";
+	    Pattern pattern = Pattern.compile(regex);
+	    Matcher matcher = pattern.matcher(pseudo);
+	    if (matcher.find()) {
+	    	result= false;
+	    }
+	    
+	    if(result = false) {
+	    	businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO_ERREUR);
+	    }
+	
+}
 	
 }
