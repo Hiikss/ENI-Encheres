@@ -29,7 +29,7 @@ public class UtilisateurManager {
 		MessageDigest digest = MessageDigest.getInstance("SHA-256");
 		utilisateur.setMotDePasse(digest.digest(mdp.getBytes(StandardCharsets.UTF_8)));
 		
-		utilisateur = this.utilisateurDAO.seConnecter(utilisateur);
+		this.utilisateurDAO.seConnecter(utilisateur);
 		
 		System.out.println(utilisateur.toString());
 		return utilisateur;
