@@ -35,12 +35,8 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String identifiant = null;
-		String mdp = null;
-		
-		identifiant = request.getParameter("identifiant");
-		
-		mdp = request.getParameter("motDePasse");
+		String identifiant = request.getParameter("identifiant");
+		String mdp = request.getParameter("motDePasse");
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
 		try {
