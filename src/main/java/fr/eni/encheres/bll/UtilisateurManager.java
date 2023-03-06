@@ -13,9 +13,17 @@ public class UtilisateurManager {
 	private static final boolean ADMIN = false;
 
 	private UtilisateurDAO utilisateurDAO;
+	private static UtilisateurManager instance;
 	
 	public UtilisateurManager() {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
+	}
+	
+	public static UtilisateurManager getInstance() {
+		if(instance == null) {
+			instance = new UtilisateurManager();
+		}
+		return instance;
 	}
 	
 	public Utilisateur seConnecter(String identifiant, byte[] mdp) throws BusinessException {
@@ -138,6 +146,12 @@ public class UtilisateurManager {
         if (ville.isBlank()){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_VILLE_ERREUR);
         }
+	}
+	
+	public Utilisateur selectUtilisateur(int id) throws BusinessException {
+		
+		return this.utilisateurDAO.selectbyId(id);
+		
 	}
 	
 }
