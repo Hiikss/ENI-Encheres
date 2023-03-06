@@ -24,7 +24,7 @@
         %>
         	<a class="nav-link" href=".">Enchères</a>
         	<a class="nav-link" href=".">Vendre un article</a>
-        	<a class="nav-link" href=".">Inscription</a>
+        	<a class="nav-link" href=".">Mon profil</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/logout">Déconnexion</a>
         <%
 			}
