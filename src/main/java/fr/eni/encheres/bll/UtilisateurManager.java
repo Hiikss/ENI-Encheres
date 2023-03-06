@@ -1,8 +1,5 @@
 package fr.eni.encheres.bll;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import fr.eni.encheres.BusinessException;
@@ -12,15 +9,10 @@ import fr.eni.encheres.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
 	
-	// Mot de passe de 4 à 8 caractères nécessitant des chiffres et des alphabets des deux cas
-    private static final String PASSWORD_REGEX =
-            "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$";
-    
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile(PASSWORD_REGEX);
+	private static final int CREDIT = 100;
+	private static final boolean ADMIN = false;
 
 	private UtilisateurDAO utilisateurDAO;
-	
 	
 	public UtilisateurManager() {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
@@ -43,14 +35,11 @@ public class UtilisateurManager {
 	}
 
 	
-	public Utilisateur Insert(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) throws BusinessException {
+	public Utilisateur insert(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse) throws BusinessException {
 		BusinessException exception = new BusinessException();
-		credit = 100;
-		administrateur =false;
 		Utilisateur utilisateur = null;
 		this.validerPseudo(pseudo, exception);
 		this.validerEmail(email, exception);
-		this.validerMotDePasse(motDePasse, exception);
 		this.validerCoordonne(nom, prenom, telephone, rue, codePostal, ville, exception);
 		
 		if(!exception.hasErreurs()) {
@@ -65,21 +54,21 @@ public class UtilisateurManager {
 			utilisateur.setVille(ville);
 			utilisateur.setCodePostal(codePostal);
 			utilisateur.setMotDePasse(motDePasse);
-			utilisateur.setCredit(credit);
-			utilisateur.setAdministrateur(administrateur);
+			utilisateur.setCredit(CREDIT);
+			utilisateur.setAdministrateur(ADMIN);
 		
-		this.utilisateurDAO.insert(utilisateur);
-			}
-		else
+			this.utilisateurDAO.insert(utilisateur);
+		}
+			else
 			{
 				throw exception;
 			}
-		
+		System.out.println(utilisateur.toString());
 		return utilisateur;
 	}
 	
 	private void validerEmail(String email, BusinessException businessException) {
-		boolean result;
+		boolean result = true;
 	    // Vérifier si l'email est nul ou vide
 	    if (email == null || email.isEmpty()) {
 	        result= false;
@@ -103,63 +92,50 @@ public class UtilisateurManager {
 	    	result= false;
 	    }
 	    
-	    if(result = false) {
+	    if(result == false) {
 	    	businessException.ajouterErreur(CodesResultatBLL.REGLE_EMAIL_ERREUR);
 	    }
 	}
-	
-	
-	private void validerMotDePasse(byte[] motDePasse, BusinessException businessException) {
-		CharSequence mdp = new String(motDePasse);
-		if (!PASSWORD_PATTERN.matcher(mdp).matches() || mdp == null || mdp.isEmpty()) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOT_DE_PASSE_ERREUR);
-        }
-		
-	}
 
 	private void validerPseudo(String pseudo, BusinessException businessException) {
-		boolean result;
+		boolean result = true;
 	    // Vérifier si le pseudo est nul ou vide
-	    if (pseudo == null || pseudo.isEmpty()) {
+	    if (pseudo.isBlank()) {
 	        result= false;
 	    }
 	    
-	    
-	    // Vérifier si le pseudo contient des caractères spéciaux invalides
-	    String regex = "[^a-zA-Z0-9.@_-]";
-	    Pattern pattern = Pattern.compile(regex);
-	    Matcher matcher = pattern.matcher(pseudo);
-	    if (matcher.find()) {
+	    if (!pseudo.matches("^[a-zA-Z0-9]+$")) {
 	    	result= false;
 	    }
 	    
-	    if(result = false) {
+	    if(result==false) {
 	    	businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO_ERREUR);
 	    }
 	
 	}
 	
 	private void validerCoordonne(String nom, String prenom, String telephone, String rue, String codePostal, String ville,BusinessException businessException) {
-		if(nom == null || nom.isBlank()){
+		if(nom.isBlank()){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_NOM_ERREUR);
         }
 
-        if (prenom == null || prenom.isBlank()){
+        if (prenom.isBlank()){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_PRENOM_ERREUR);
         }
-
-
         
-
-        if (rue == null || rue.isBlank()){
+        if (telephone.isBlank() || telephone.length()!=10){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_RUE_ERREUR);
         }
 
-        if (codePostal == null || codePostal.isBlank()){
+        if (rue.isBlank()){
+            businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_RUE_ERREUR);
+        }
+
+        if (codePostal.isBlank() || codePostal.length()!=5 ){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_CODEPOSTAL_ERREUR);
         }
 
-        if (ville == null || ville.isBlank()){
+        if (ville.isBlank()){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_VILLE_ERREUR);
         }
 	}

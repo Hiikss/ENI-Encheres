@@ -18,6 +18,6 @@ public class CodesResultatBLL {
 	
 	public static final int REGLE_USER_VILLE_ERREUR=20007;
 	
-	
+	public static final int REGLE_USER_TELEPHONE_ERREUR=20008;
 
 }

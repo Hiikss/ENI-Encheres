@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.tribes.util.Arrays;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -31,7 +32,7 @@ public class ServletSignUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creationCompte.jsp");
 		rd.forward(request, response);
 	}
 
@@ -60,10 +61,7 @@ public class ServletSignUp extends HttpServlet {
 		byte[] confirmationMotDePasse = digest.digest(request.getParameter("confirmationMotDePasse").getBytes(StandardCharsets.UTF_8));
 		
 		List<Integer> listeErreurs = new ArrayList<>();
-		//Vérifie que le pseudo ne contient que des caractères alphanumériques
-		if(!pseudo.matches("[^a-zA-Z0-9]")) {
-			listeErreurs.add(CodesResultatServlets.FORMAT_PSEUDO_ERREUR);
-		}
+		
 		//Vérifie que les mots de passe sont égaux
 		if(!Arrays.equals(motDePasse, confirmationMotDePasse)) {
 			listeErreurs.add(CodesResultatServlets.MDP_DIFFERENTS_ERREUR);
@@ -71,14 +69,20 @@ public class ServletSignUp extends HttpServlet {
 		//S'il y a des erreurs, renvoie la page d'inscription avec les erreurs
 		if(listeErreurs.size()>0) {
 			request.setAttribute("listeErreurs", listeErreurs);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp");
-			rd.forward(request, response);
+			doGet(request, response);
 		}
 		else {
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
-			Utilisateur utilisateur = utilisateurManager.insert(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-			session.setAttribute("utilisateur", utilisateur);
-			response.sendRedirect(request.getContextPath() + "/accueil");
+			Utilisateur utilisateur;
+			try {
+				utilisateur = utilisateurManager.insert(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+				session.setAttribute("utilisateur", utilisateur);
+				response.sendRedirect(request.getContextPath() + "/accueil");
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				request.setAttribute("listeErreurs", e.getListeCodesErreur());
+				doGet(request, response);
+			}
 		}
 	}
 

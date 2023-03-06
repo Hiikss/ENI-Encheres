@@ -14,8 +14,9 @@
 	<nav class="navbar navbar-light bg-light">
 	<a href="<%=request.getContextPath()%>/accueil" class="navbar-brand">ENI-Encheres</a>
 	</nav>
-	<h1 class="mt-5 text-center">Inscription</h1>
 	<section class="container">
+	<h1 class="mt-5 text-center">Inscription</h1>
+	<%@ include file="/WEB-INF/jsp/bandeauErreur.jspf" %>
 		<form action="<%=request.getContextPath()%>/signup"
 			method="post" class="mt-5">
 			<div class="form-group row mt-4 justify-content-center">
@@ -66,7 +67,7 @@
 				</div>
 				<label for="confirmation" class="col-2 col-form-label">Confirmation : </label>
 				<div class="col-3">
-				<input class="form-control" type="password" id="confirmationMotDePasse" name="confirmation" required>
+				<input class="form-control" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" required>
 				</div>
 			</div>
 		<div class="row justify-content-center mt-5">

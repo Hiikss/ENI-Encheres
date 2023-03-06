@@ -18,9 +18,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		if (utilisateur == null) {
 			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
-		
+		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			BusinessException be = new BusinessException();
 			//Test si le pseudo existe déjà
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_PSEUDO);
 			pstmt.setString(1, utilisateur.getPseudo());
@@ -73,6 +72,9 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			if(e instanceof BusinessException) {
+				throw be;
+			}
 			throw new BusinessException(CodesResultatDAL.INSERT_UTILISATEUR_ECHEC);
 		}
 	}
