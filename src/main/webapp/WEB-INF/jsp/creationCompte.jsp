@@ -65,7 +65,7 @@
 				<div class="col-3">
 					<input class="form-control" type="password" id="motDePasse" name="motDePasse" required>
 				</div>
-				<label for="confirmation" class="col-2 col-form-label">Confirmation : </label>
+				<label for="confirmationMotDePasse" class="col-2 col-form-label">Confirmation : </label>
 				<div class="col-3">
 				<input class="form-control" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" required>
 				</div>
