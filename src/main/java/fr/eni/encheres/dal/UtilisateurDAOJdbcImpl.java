@@ -11,7 +11,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_PSEUDO = "SELECT * FROM Utilisateurs WHERE pseudo=?";
 	private static final String SELECT_EMAIL = "SELECT * FROM Utilisateurs WHERE email=?";
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
-	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
+	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs WHERE (pseudo=? or email=?) AND mot_de_passe=?";
+	private static final String DELETE = "DELETE FROM Utilisateurs WHERE no_utilisateur=?";
 	
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -119,21 +120,29 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	@Override
 	public void update(Utilisateur utilisateur) throws BusinessException{
-			if(utilisateur==null) {
-				throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
-			}
-	}
-
-	@Override
-	public void delete(Utilisateur utilisateur) throws BusinessException {
-		if (utilisateur == null) {
+		if(utilisateur == null) {
 			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
 	}
 
 	@Override
+	public void delete(Utilisateur utilisateur) throws BusinessException {
+		if(utilisateur==null) {
+			throw new BusinessException(CodesResultatDAL.UTILISATEUR_NULL);
+		}
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+			pstmt.setInt(1, utilisateur.getNoUtilisateur());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException(CodesResultatDAL.DELETE_UTILISATEUR_ECHEC);
+		}
+	}
+
+	@Override
 	public void selectbyId(Utilisateur utilisateur) throws BusinessException {
-		if (utilisateur == null) {
+		if(utilisateur == null) {
 			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
 		}
 

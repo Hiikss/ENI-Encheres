@@ -67,6 +67,10 @@ public class UtilisateurManager {
 		return utilisateur;
 	}
 	
+	public void delete(Utilisateur utilisateur) throws BusinessException {
+		this.utilisateurDAO.delete(utilisateur);
+	}
+	
 	private void validerEmail(String email, BusinessException businessException) {
 		boolean result = true;
 	    // Vérifier si l'email est nul ou vide
