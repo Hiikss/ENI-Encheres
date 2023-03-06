@@ -35,11 +35,11 @@ public class ServletProfil extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
-		boolean proprio = true;
+		boolean uSession = true;
 		if (request.getParameter("id") != null){
 			int id = Integer.parseInt(request.getParameter("id"));			
 			if(id != utilisateur.getNoUtilisateur()) {
-				proprio = false;
+				uSession = false;
 				UtilisateurManager um = UtilisateurManager.getInstance();
 				try {
 					utilisateur = um.selectUtilisateur(id);
@@ -49,7 +49,7 @@ public class ServletProfil extends HttpServlet {
 			}
 		}
 		
-		request.setAttribute("ok", proprio);
+		request.setAttribute("ok", uSession);
 		request.setAttribute("utilisateur", utilisateur);
 		request.getRequestDispatcher("/WEB-INF/jsp/Profil.jsp").forward(request, response);
 	}
