@@ -19,7 +19,7 @@ public class Utilisateur {
 	private List<ArticleVendu> vente;
 	private List<Enchere> encherit;
 	
-	private boolean administrateur = false;
+	private boolean administrateur;
 
 	public Utilisateur() {
 		vente = new ArrayList<>();
@@ -27,6 +27,33 @@ public class Utilisateur {
 	}
 	
 	
+
+	/**
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 */
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, byte[] motDePasse) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+	}
+
+
 
 	/**
 	 * @param noUtilisateur
