@@ -17,7 +17,7 @@
 	<section class="container">
 	<h1 class="mt-5 text-center">Mon Profil</h1>
 	<%@ include file="/WEB-INF/jsp/bandeauErreur.jspf" %>
-		<form action="<%=request.getContextPath()%>/accueil"
+		<form action="<%=request.getContextPath()%>/modification"
 			method="post" class="mt-5">
 			<div class="form-group row mt-4">
 				<label for="pseudo" class="col-2 offset-1 col-form-label ">Pseudo :</label>
@@ -81,7 +81,7 @@
 				</div>
 		<div class="row justify-content-center mt-5">
   			<button type="submit" class="btn btn-outline-success col-2">Enregistrer</button>
-  			<a href="<%=request.getContextPath()%>/" class="col-2 offset-1 btn btn-outline-danger" role="button">Supprimer mon compte</a>
+  			<a href="<%=request.getContextPath()%>/suppression" class="col-2 offset-1 btn btn-outline-danger" role="button">Supprimer mon compte</a>
   		</div>
   		</form>
 	</section>
