@@ -27,7 +27,7 @@ import fr.eni.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletModifProfil
  */
-@WebServlet("/ServletModifProfil")
+@WebServlet("/modification")
 public class ServletModifProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -90,7 +90,8 @@ public class ServletModifProfil extends HttpServlet {
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeErreurs", e.getListeCodesErreur());
-				doGet(request, response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/modificationProfil.jsp");
+				dispatcher.forward(request, response);
 			}
 		}
 	}

@@ -120,14 +120,10 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void update(Utilisateur utilisateur) throws BusinessException {
-		PreparedStatement pstmt = null;
-		boolean success = false;
-
 		// Récupérer la connexion à la base de données
-		BusinessException be = new BusinessException();
-		try (Connection cnx = ConnectionProvider.getConnection()) {
+ 		try (Connection cnx = ConnectionProvider.getConnection()) {
 
-			pstmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
+ 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
 			pstmt.setString(1, utilisateur.getPseudo());
 			pstmt.setString(2, utilisateur.getNom());
 			pstmt.setString(3, utilisateur.getPrenom());
@@ -137,6 +133,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setString(7, utilisateur.getCodePostal());
 			pstmt.setString(8, utilisateur.getVille());
 			pstmt.setBytes(9, utilisateur.getMotDePasse());
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
