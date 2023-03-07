@@ -25,7 +25,7 @@
         %>
         	<a class="nav-link" href=".">Enchères</a>
         	<a class="nav-link" href=".">Vendre un article</a>
-        	<a class="nav-link" href="<%=request.getContextPath()%>/Profil">Mon profil</a>
+        	<a class="nav-link" href="<%=request.getContextPath()%>/profil">Mon profil</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/logout">Déconnexion</a>
         <%
 			}
@@ -49,7 +49,7 @@
     %>
    		<div class="row justify-content-around">
 	       	<a class="d-sm-none" href=".">Vendre un article</a>
-	       	<a class="d-sm-none" href=".">Mon profil</a>
+	       	<a class="d-sm-none" href="<%=request.getContextPath()%>/profil">Mon profil</a>
 	       	<a class="d-sm-none" href="<%=request.getContextPath()%>/logout">Déconnexion</a>
 	    </div>
     <%

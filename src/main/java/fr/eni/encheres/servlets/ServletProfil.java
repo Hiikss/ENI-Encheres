@@ -11,12 +11,11 @@ import javax.servlet.http.HttpSession;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
-import fr.eni.encheres.dal.UtilisateurDAO;
 
 /**
  * Servlet implementation class ServletProfil
  */
-@WebServlet("/Profil")
+@WebServlet("/profil")
 public class ServletProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,7 +50,7 @@ public class ServletProfil extends HttpServlet {
 		
 		request.setAttribute("ok", uSession);
 		request.setAttribute("utilisateur", utilisateur);
-		request.getRequestDispatcher("/WEB-INF/jsp/Profil.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
 	}
 
 	/**
