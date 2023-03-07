@@ -14,26 +14,50 @@
 	</nav>
 	
 <section>
-	<div class="profil">
+	<div class="container">
 	
 		<%Utilisateur utilisateur =(Utilisateur) request.getAttribute("utilisateur"); %>
-		
-			<p>Pseudo : <%=utilisateur.getPseudo() %> </p>
-			<p>Nom : <%=utilisateur.getNom() %></p>
-			<p>Prénom : <%=utilisateur.getPrenom() %></p>
-			<p>Email : <%=utilisateur.getEmail() %></p>
-			<p>Telephone : <%=utilisateur.getTelephone() %> </p>
-			<p>Rue : <%=utilisateur.getRue() %></p>
-			<p>Code Postal : <%=utilisateur.getCodePostal() %></p>
-			<p>Ville : <%=utilisateur.getVille() %></p>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Pseudo : </div>
+			<div class="col col-lg-2"><%=utilisateur.getPseudo() %> </div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Nom : </div>
+			<div class="col col-lg-2"><%=utilisateur.getNom() %></div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Prénom : </div>
+			<div class="col col-lg-2"><%=utilisateur.getPrenom() %></div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Email : </div>
+			<div class="col col-lg-2"><%=utilisateur.getEmail() %></div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Telephone : </div>
+			<div class="col col-lg-2"><%=utilisateur.getTelephone() %></div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Rue : </div>
+			<div class="col col-lg-2"><%=utilisateur.getRue() %></div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Code Postal : </div>
+			<div class="col col-lg-2"><%=utilisateur.getCodePostal() %></div>
+			</div>
+			<div class="row justify-content-md-center">
+			<div class="col col-lg-2">Ville : </div>
+			<div class="col col-lg-2"><%=utilisateur.getVille() %></div>
+			</div>
 			
 		<% if(request.getAttribute("ok") != null){
 				boolean ok = (boolean) request.getAttribute("ok");
 				if(ok){%>
-				--! Verifier le lien--
-				<a href="<%=request.getContextPath()%>/modfierProfil">
+				
+				<a href="<%=request.getContextPath()%>/modfierProfil" class="row justify-content-center mt-5">
 				<button type="submit" value="modifier" name="modifier">Modifier</button>
 				</a>
+				
 				<%}
 				}%>
 		

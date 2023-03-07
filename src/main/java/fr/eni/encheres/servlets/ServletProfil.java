@@ -16,7 +16,7 @@ import fr.eni.encheres.dal.UtilisateurDAO;
 /**
  * Servlet implementation class ServletProfil
  */
-@WebServlet("/ServletProfil")
+@WebServlet("/Profil")
 public class ServletProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
