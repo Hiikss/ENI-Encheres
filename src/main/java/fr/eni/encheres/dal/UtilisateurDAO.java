@@ -17,5 +17,6 @@ public interface UtilisateurDAO {
 
 	void selectbyId(Utilisateur utilisateur) throws BusinessException;
 
+	Utilisateur selectbyId(int id) throws BusinessException;
 
 }

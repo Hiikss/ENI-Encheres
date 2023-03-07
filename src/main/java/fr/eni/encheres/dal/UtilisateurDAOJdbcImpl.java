@@ -15,7 +15,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
 	private static final String UPDATE_UTILISATEUR = "UPDATE Utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?";
-
+	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
+	
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
@@ -153,10 +154,41 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void selectbyId(Utilisateur utilisateur) throws BusinessException {
-		if (utilisateur == null) {
-			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
+	public Utilisateur selectbyId(int id) throws BusinessException {
+		Utilisateur utilisateur = null;
+		Connection cnx;
+		ResultSet rs;
+	
+		try {
+			
+			cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				utilisateur = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
+						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+						rs.getString("code_postal"), rs.getString("ville"));
+				utilisateur.setNoUtilisateur(id);
+			}
+			
+			rs.close();
+			pstmt.close();
+			cnx.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException(CodesResultatDAL.SELECT_USER_ECHEC);
 		}
 
+		return utilisateur;
+
+	}
+
+	@Override
+	public void selectbyId(Utilisateur utilisateur) throws BusinessException {
+		// TODO Auto-generated method stub
+		
 	}
 }
