@@ -3,7 +3,6 @@ package fr.eni.encheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
@@ -13,7 +12,6 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_PSEUDO = "SELECT * FROM Utilisateurs WHERE pseudo=?";
 	private static final String SELECT_EMAIL = "SELECT * FROM Utilisateurs WHERE email=?";
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
-	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
 	private static final String UPDATE_UTILISATEUR = "UPDATE Utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?";
 	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
 	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs WHERE (pseudo=? or email=?) AND mot_de_passe=?";
@@ -186,5 +184,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException(CodesResultatDAL.SELECT_USER_ECHEC);
+		}
+		return utilisateur;
 	}
 }
