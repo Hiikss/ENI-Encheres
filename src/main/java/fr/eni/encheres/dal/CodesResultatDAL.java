@@ -15,5 +15,7 @@ public abstract class CodesResultatDAL {
 		public static final int SE_CONNECTER_UTILISATEUR_ECHEC=10005;
 
 		public static final int UTILISATEUR_NULL = 10006;
+		
+		public static final int UPDATE_UTILISATEUR_ECHEC=10007;
 }
 

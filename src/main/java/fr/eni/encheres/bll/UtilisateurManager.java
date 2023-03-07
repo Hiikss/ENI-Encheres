@@ -1,7 +1,11 @@
 package fr.eni.encheres.bll;
 
+import java.sql.PreparedStatement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.catalina.tribes.util.Arrays;
+
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DAOFactory;
@@ -66,7 +70,41 @@ public class UtilisateurManager {
 		System.out.println(utilisateur.toString());
 		return utilisateur;
 	}
-	
+	public void update(Utilisateur utilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasseActuel, byte[] nouveauMotDePasse) throws BusinessException{
+		BusinessException exception = new BusinessException();
+		this.validerPseudo(pseudo, exception);
+		this.validerEmail(email, exception);
+		this.validerCoordonne(nom, prenom, telephone, rue, codePostal, ville, exception);
+		this.validerComparaisonMdp(utilisateur.getMotDePasse(), motDePasseActuel, exception);
+		
+		if(!exception.hasErreurs()) {
+			
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setEmail(email);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setRue(rue);
+			utilisateur.setVille(ville);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setMotDePasse(nouveauMotDePasse);
+		
+			this.utilisateurDAO.update(utilisateur);
+		}
+			else
+			{
+				throw exception;
+			}
+		System.out.println(utilisateur.toString());
+		
+		}	
+	private void validerComparaisonMdp (byte[] mdpActuel,byte[] mdpSaisi,BusinessException businessException ) {
+		if (!Arrays.equals(mdpActuel, mdpSaisi)) {
+			businessException.ajouterErreur(CodesResultatBLL.MDP_COMPARAISON_ERREUR);
+		}
+		
+	}
+	  
 	private void validerEmail(String email, BusinessException businessException) {
 		boolean result = true;
 	    // Vérifier si l'email est nul ou vide
@@ -138,6 +176,5 @@ public class UtilisateurManager {
         if (ville.isBlank()){
             businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_VILLE_ERREUR);
         }
-	}
-	
+	}  
 }

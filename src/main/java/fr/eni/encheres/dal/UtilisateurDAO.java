@@ -16,4 +16,6 @@ public interface UtilisateurDAO {
 	void delete(Utilisateur utilisateur) throws BusinessException;
 
 	void selectbyId(Utilisateur utilisateur) throws BusinessException;
+
+
 }
