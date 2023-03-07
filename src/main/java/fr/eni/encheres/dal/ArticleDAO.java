@@ -1,5 +1,11 @@
 package fr.eni.encheres.dal;
 
-public class ArticleDAO {
+import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bo.ArticleVendu;
+
+
+public interface ArticleDAO {
+	
+	void insert (ArticleVendu article) throws BusinessException;
 
 }
