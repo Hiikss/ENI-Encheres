@@ -14,18 +14,11 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_EMAIL = "SELECT * FROM Utilisateurs WHERE email=?";
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
-<<<<<<< HEAD
 	private static final String UPDATE_UTILISATEUR = "UPDATE Utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?";
-<<<<<<< Updated upstream
 	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
+	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs WHERE (pseudo=? or email=?) AND mot_de_passe=?";
+	private static final String DELETE = "DELETE FROM Utilisateurs WHERE no_utilisateur=?";
 	
-=======
-
-=======
-	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
-	
->>>>>>> 6c0514283fef942e1150d15ccc69ef8f6a04fee3
->>>>>>> Stashed changes
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
@@ -149,13 +142,20 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			e.printStackTrace();
 			throw new BusinessException(CodesResultatDAL.UPDATE_UTILISATEUR_ECHEC);
 		}
-
 	}
 
 	@Override
 	public void delete(Utilisateur utilisateur) throws BusinessException {
-		if (utilisateur == null) {
-			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
+		if(utilisateur==null) {
+			throw new BusinessException(CodesResultatDAL.UTILISATEUR_NULL);
+		}
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+			pstmt.setInt(1, utilisateur.getNoUtilisateur());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException(CodesResultatDAL.DELETE_UTILISATEUR_ECHEC);
 		}
 	}
 
@@ -186,14 +186,5 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException(CodesResultatDAL.SELECT_USER_ECHEC);
-		}
-
-		return utilisateur;
-	}
-	@Override
-	public void selectbyId(Utilisateur utilisateur) throws BusinessException {
-		// TODO Auto-generated method stub
-		
-
 	}
 }
