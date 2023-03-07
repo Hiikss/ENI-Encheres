@@ -18,6 +18,20 @@ public class Retrait {
 	
 
 	/**
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 */
+	public Retrait(String rue, String code_postal, String ville) {
+		super();
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+	}
+
+
+
+	/**
 	 * @param noRetrait
 	 * @param rue
 	 * @param code_postal

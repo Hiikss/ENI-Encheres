@@ -19,5 +19,11 @@ public class CodesResultatBLL {
 	public static final int REGLE_USER_VILLE_ERREUR=20007;
 	
 	public static final int REGLE_USER_TELEPHONE_ERREUR=20008;
+	
+	public static final int REGLE_ARTICLE_NOM_ERREUR = 20009;
+	
+	public static final int REGLE_ARTICLE_DESCRIPTION_ERREUR = 20010;
+	
+	public static final int REGLE_ARTICLE_DATE_ERREUR = 20011;
 
 }
