@@ -14,9 +14,18 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_EMAIL = "SELECT * FROM Utilisateurs WHERE email=?";
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
+<<<<<<< HEAD
 	private static final String UPDATE_UTILISATEUR = "UPDATE Utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?";
+<<<<<<< Updated upstream
 	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
 	
+=======
+
+=======
+	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
+	
+>>>>>>> 6c0514283fef942e1150d15ccc69ef8f6a04fee3
+>>>>>>> Stashed changes
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
 		if (utilisateur == null) {
@@ -180,12 +189,11 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 
 		return utilisateur;
-
 	}
-
 	@Override
 	public void selectbyId(Utilisateur utilisateur) throws BusinessException {
 		// TODO Auto-generated method stub
 		
+
 	}
 }

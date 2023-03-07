@@ -1,6 +1,5 @@
 package fr.eni.encheres.bll;
 
-import java.sql.PreparedStatement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -185,13 +184,9 @@ public class UtilisateurManager {
 		if (ville.isBlank()) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_VILLE_ERREUR);
 		}
-
 	}
 
 	public Utilisateur selectUtilisateur(int id) throws BusinessException {
-
 		return this.utilisateurDAO.selectbyId(id);
-
 	}
-
 }
