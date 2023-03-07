@@ -37,31 +37,35 @@
 <header>
 	<h1 class="mt-4 mb-5 text-center">Liste des enchères</h1>
 </header>
-<section class="container mt-4">
+<section class="container mt-4"><!-- d-flex justify-content-center justify-content-sm-start-->
 	<form action="<%=request.getContextPath()%>/accueil" method="post">
 		<div class="row">
-			<article class="col-6">
+			<article class="col-12 col-sm-6">
 				<div class="row">
-					<h5 class="col-12">Filtres :</h5>
+					<h5 class="col-10 offset-1 col-sm-12 offset-sm-0">Filtres :</h5>
 				</div>
-				<div class="row mt-2">
-					<div class="input-group col-8 pr-0">
-						<div class="input-group-prepend">
-			       			<i class="bi bi-search input-group-text"></i>
-			    		</div> 
-			      		<input type="text" class="form-control" id="searchZone" placeholder="Le nom de l'article contient">
+				<div class="row">
+					<div class="col-10 mt-sm-2 offset-1 offset-sm-0 order-last order-sm-first pr-0">
+						<div class="input-group">
+							<div class="input-group-prepend">
+				       			<i class="bi bi-search input-group-text"></i>
+				    		</div> 
+				      		<input type="text" class="form-control" id="searchZone" placeholder="Le nom de l'article contient">
+			    		</div>
+	    			</div>
+	    			<div class="col-10 offset-1 col-sm-12 offset-sm-0 mt-sm-3 order-first order-sm-last">
+			    		<div class="form-group row">
+			      			<label class="col-4 col-sm-3 d-flex align-items-center" for="categories">Catégorie :</label>
+			      			<select id="categories" class="form-control col-8 col-sm-7">
+			        			<option selected>Toutes</option>
+			        			<option>Informatique</option>
+			        			<option>Ameublement</option>
+			        			<option>Vêtement</option>
+			        			<option>Sport &amp; loisirs</option>
+			      			</select>
+			    		</div>
 		    		</div>
-	    		</div>
-	    		<div class="form-group row mt-3">
-	      			<label class="col-3 d-flex align-items-center" for="categories">Catégorie :</label>
-	      			<select id="categories" class="form-control col-5">
-	        			<option selected>Toutes</option>
-	        			<option>Informatique</option>
-	        			<option>Ameublement</option>
-	        			<option>Vêtement</option>
-	        			<option>Sport &amp; loisirs</option>
-	      			</select>
-	    		</div>
+		    	</div>
 	    		<%
 					if(session.getAttribute("utilisateur")!=null)
 					{
@@ -108,8 +112,8 @@
 					}
        			 %>
 			</article>
-			<article class="col-6 mt-6 d-flex align-items-center">
-				<button type="submit" class="col-5 offset-1 btn btn-outline-primary p-4">Rechercher</button>
+			<article class="col-12 col-sm-6 mt-3 mt-sm-0 d-flex align-items-center pr-0">
+				<button type="submit" class="col-10 col-sm-6 offset-1 btn btn-outline-primary p-4">Rechercher</button>
 			</article>
 		</div>
 	</form>
