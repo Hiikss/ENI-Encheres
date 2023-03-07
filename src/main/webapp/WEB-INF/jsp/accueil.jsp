@@ -38,7 +38,7 @@
 	<h1 class="mt-4 mb-5 text-center">Liste des enchères</h1>
 </header>
 <section class="container mt-4"><!-- d-flex justify-content-center justify-content-sm-start-->
-	<form action="<%=request.getContextPath()%>/accueil" method="post">
+	<form action="<%=request.getContextPath()%>/accueil" method="get">
 		<div class="row">
 			<article class="col-12 col-sm-6">
 				<div class="row">
@@ -71,7 +71,7 @@
 					{
 				%>
 				<div class="row">
-						<div class="col-6">
+						<div class="col-8 offset-2 col-sm-6 offset-sm-0">
 							<div class="form-check">
 	  							<input class="form-check-input" type="radio" name="type" id="achats" value="achats" checked>
 	  							<label class="form-check-label" for="achats">Achats</label>
@@ -89,7 +89,7 @@
 	  							<label class="form-check-label" for="mesEncheresRemportees">mes enchères remportées</label>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-8 offset-2 col-sm-6 offset-sm-0">
 							<div class="form-check">
 	  							<input class="form-check-input" type="radio" name="type" id="ventes" value="ventes">
 	  							<label class="form-check-label" for="ventes">Mes ventes</label>
