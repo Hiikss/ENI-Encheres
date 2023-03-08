@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Retrait {
+	private int noRetrait;
 	private String rue;
 	private String code_postal;
 	private String ville;
@@ -20,6 +21,39 @@ public class Retrait {
 	 * @param rue
 	 * @param code_postal
 	 * @param ville
+	 */
+	public Retrait(String rue, String code_postal, String ville) {
+		super();
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+	}
+
+
+
+	/**
+	 * @param noRetrait
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @param article
+	 */
+	public Retrait(int noRetrait, String rue, String code_postal, String ville, List<ArticleVendu> article) {
+		super();
+		this.noRetrait = noRetrait;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.article = article;
+		article = new ArrayList<>();
+	}
+
+
+
+	/**
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
 	 * @param article
 	 */
 	public Retrait(String rue, String code_postal, String ville, List<ArticleVendu> article) {
@@ -29,6 +63,18 @@ public class Retrait {
 		this.ville = ville;
 		this.article = article;
 		article = new ArrayList<>();
+	}
+
+
+
+	public int getNoRetrait() {
+		return noRetrait;
+	}
+
+
+
+	public void setNoRetrait(int noRetrait) {
+		this.noRetrait = noRetrait;
 	}
 
 

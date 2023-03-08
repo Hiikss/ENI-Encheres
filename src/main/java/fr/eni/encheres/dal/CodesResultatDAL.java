@@ -16,11 +16,12 @@ public abstract class CodesResultatDAL {
 
 		public static final int UTILISATEUR_NULL = 10006;
 
+		public static final int SELECT_USER_ECHEC = 10007;
+		
+		public static final int INSERT_ARTICLE_ECHEC = 10008;
+
 		public static final int UPDATE_UTILISATEUR_ECHEC=10007;
 
-		public static final int SELECT_USER_ECHEC = 10008;
-
 		public static final int DELETE_UTILISATEUR_ECHEC = 10009;
-		
-		public static final int INSERT_ARTICLE_ECHEC = 10010;
+
 }
