@@ -7,9 +7,12 @@ public abstract class DAOFactory {
 	{
 		return new UtilisateurDAOJdbcImpl();
 	}
-	
 
 	public static ArticleDAO getArticleDAO() {
 		return new ArticleDAOJdbcImpl();
+	}
+	
+	public static EnchereDAO getEnchereDAO() {
+		return new EnchereDAOJdbcImpl();
 	}
 }
