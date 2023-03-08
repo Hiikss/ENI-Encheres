@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@page import=" fr.eni.encheres.bo.Categorie" %>
+ <%@page import="java.util.List" %>
+ <%@page import="fr.eni.encheres.bll.CategorieManager"%>
+<%@page import="fr.eni.encheres.bo.Utilisateur"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +18,10 @@
 	<section class="container">
 	<h1 class="mt-5 text-center">Nouvelle Vente</h1>
 	<%@ include file="/WEB-INF/jsp/bandeauErreur.jspf" %>
+	
 		<form action="<%=request.getContextPath()%>/NouvelleVente"
 			method="post" class="mt-5">
+			
 			<div class="form-group row mt justify-content-center">
 			<div class="col col-lg-2">
 				<label for="article" class="col-2 col-form-label ">Article :</label>
@@ -24,6 +30,7 @@
 					<input class="form-control" id="article" name="article" required>
 				</div>
 				</div>
+				
 				<div class="form-group row mt-4 justify-content-center">
 				<div class="col col-lg-2">
 				<label for="description" class="col-2 col-form-label">Description :</label>		
@@ -32,21 +39,20 @@
 				<textarea class="form-control" id="description" name="description" required></textarea>
 				</div>
 				</div>
+				
 				<div class="form-group row mt-4 justify-content-center">
 				<div class="col col-lg-2">
 				<label for="categorie" class="col-2 col-form-label">Catégorie :</label>
 				</div>
 				<div class="col col-lg-2">
-					<select id="categorie" class="form-control">
-      					  <option selected>Informatique</option>
-    					    <option>Bricolage</option>
-    					    <option>Jardinage</option>
-    					    <option>Meuble</option>
-    					    <option>Rangement</option>
-    					    <option>Bureautique</option>
+					<select id="categorie" class="form-control" name="categorie">
+						<%for(Categorie categorie : CategorieManager.SelectAllCategories()) {%>
+      					  <option value="<%=categorie.getNoCategorie() %>"><%=categorie.getLibelle() %></option>
+    					  <%} %>  
    					   </select>
 				</div>	
 				</div>
+				
 				<div class="form-group row mt-4 justify-content-center">	
 				<div class="col col-lg-2">
    					 <label for="upload" class="col-2 col-form-label">Photo de l'article :</label>
@@ -55,6 +61,7 @@
  					 <input type="file" class="form-control-file" id="upload">
  				</div>
  				</div>
+ 				
 				<div class="form-group row mt-4 justify-content-center">
  				<div class="col col-lg-2">
    			   <label class="col-2 col-form-label" for="miseAPrix">Prix de vente :</label>
@@ -63,6 +70,7 @@
     			  <input class="form-control" type ="number" name="miseAPrix" id="miseAPrix" step="1" max="10000" required>
  			   </div>
  			 </div>
+ 			 
 				<div class="form-group row mt-4 justify-content-center">
  			   <div class="col col-lg-2">
  				<label for="dated" class="col-2 col-form-label ">Début de l'enchère :</label>
@@ -71,6 +79,7 @@
 					<input type="date" class="form-control" id="dated" name="dated" required>
 				</div>
 				</div>
+				
 				<div class="form-group row mt-4 justify-content-center">
 				<div class="col col-lg-2">
 				<label for="datef" class="col-2 col-form-label ">Fin de l'enchère :</label>
@@ -79,8 +88,10 @@
 					<input type="date" class="form-control" id="datef" name="datef" required>
 				</div>
 				</div>
+				
+				
 				<div class="form-group row mt-4 justify-content-center">
-				<fieldset name="Retrait">
+				<fieldset name="Retrait">Retrait
 				
 				<div class="form-group row mt-4 justify-content-center">
 				<div class="col col-lg-2">

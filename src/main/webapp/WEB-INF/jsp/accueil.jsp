@@ -24,7 +24,7 @@
 			else {
         %>
         	<a class="nav-link" href=".">Enchères</a>
-        	<a class="nav-link" href=".">Vendre un article</a>
+        	<a class="nav-link" href="<%=request.getContextPath()%>/NouvelleVente">Vendre un article</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/profil">Mon profil</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/logout">Déconnexion</a>
         <%
