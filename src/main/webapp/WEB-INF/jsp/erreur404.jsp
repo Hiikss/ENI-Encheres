@@ -13,7 +13,10 @@
 </nav>
 <section class="container">
 	<div class="col col-md-8 offset-md-2 alert alert-danger text-center mt-4" role="alert">
-		Erreur 404 - Fichier introuvable
+		Erreur 404 - Page introuvable
+	</div>
+	<div class="row justify-content-center mt-5">
+		<a href="<%=request.getContextPath()%>/accueil" class="p-3 btn btn-outline-primary" role="button">Retour à l'accueil</a>
 	</div>
 </section>
 </body>
