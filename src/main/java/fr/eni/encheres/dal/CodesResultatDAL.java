@@ -27,5 +27,7 @@ public abstract class CodesResultatDAL {
 		public static final int INSERT_RETRAIT_ECHEC = 10011;
 		
 		public static final int LECTURE_RETRAIT_ECHEC = 10012;
+		
+		public static final int LECTURE_CATEGORIE_ECHEC = 10013;
 
 }

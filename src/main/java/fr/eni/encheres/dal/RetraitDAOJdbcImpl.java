@@ -55,6 +55,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 			
 			if(rs.next()) {
 				retrait = new Retrait();
+				retrait.setNoRetrait(rs.getInt("no_retrait"));
 				retrait.setRue(rs.getString("rue"));
 				retrait.setCode_postal(rs.getString("code_postal"));
 				retrait.setVille(rs.getString("ville"));

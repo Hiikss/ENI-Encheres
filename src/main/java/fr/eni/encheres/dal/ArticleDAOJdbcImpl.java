@@ -30,12 +30,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				pstmt.setInt(5, article.getMiseAPrix());
 				pstmt.setInt(6, article.getVendeur().getNoUtilisateur());
 				pstmt.setInt(7, article.getCategorieArticle().getNoCategorie());
-				pstmt.executeUpdate();
-				rs = pstmt.getGeneratedKeys();
-				if (rs.next()) {
-					article.setNoArticle(rs.getInt(1));;
-				}
-
 				pstmt.setInt(8, article.getLieuRetrait().getNoRetrait());
 				
 				pstmt.executeUpdate();
