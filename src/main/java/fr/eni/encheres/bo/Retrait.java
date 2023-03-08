@@ -1,18 +1,14 @@
 package fr.eni.encheres.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Retrait {
 	private int noRetrait;
 	private String rue;
 	private String code_postal;
 	private String ville;
-	private List<ArticleVendu> article;
+	private ArticleVendu article;
 	
 	
 	public Retrait() {
-		article = new ArrayList<>();
 	}
 	
 	
@@ -29,7 +25,20 @@ public class Retrait {
 		this.ville = ville;
 	}
 
-
+	/**
+	 * 
+	 * @param noRetrait
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 */
+	public Retrait(int noRetrait, String rue, String code_postal, String ville) {
+		super();
+		this.noRetrait = noRetrait;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+	}
 
 	/**
 	 * @param noRetrait
@@ -38,14 +47,13 @@ public class Retrait {
 	 * @param ville
 	 * @param article
 	 */
-	public Retrait(int noRetrait, String rue, String code_postal, String ville, List<ArticleVendu> article) {
+	public Retrait(int noRetrait, String rue, String code_postal, String ville, ArticleVendu article) {
 		super();
 		this.noRetrait = noRetrait;
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
 		this.article = article;
-		article = new ArrayList<>();
 	}
 
 
@@ -56,13 +64,12 @@ public class Retrait {
 	 * @param ville
 	 * @param article
 	 */
-	public Retrait(String rue, String code_postal, String ville, List<ArticleVendu> article) {
+	public Retrait(String rue, String code_postal, String ville, ArticleVendu article) {
 		super();
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
 		this.article = article;
-		article = new ArrayList<>();
 	}
 
 
@@ -104,13 +111,13 @@ public class Retrait {
 	}
 	
 
-	public List<ArticleVendu> getArticle() {
+	public ArticleVendu getArticle() {
 		return article;
 	}
 
 
 
-	public void setArticle(List<ArticleVendu> article) {
+	public void setArticle(ArticleVendu article) {
 		this.article = article;
 	}
 
