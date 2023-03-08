@@ -22,8 +22,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Retrait retrait = new Retrait(rs.getInt("noRetrait"), rs.getString("rue"), rs.getString("cp"), rs.getString("ville"));
-				
+				//Retrait
+				Retrait retrait = null;
+				for(Retrait r : Retrait.instances) {
+					if(r.getNoRetrait()==rs.getInt("noRetrait")) {
+						retrait = r;
+					}
+				}
+				if(retrait==null) {
+					retrait = new Retrait(rs.getInt("noRetrait"), rs.getString("rue"), rs.getString("cp"), rs.getString("ville"));
+				}
+				//Categorie
 				Categorie categorie = null;
 				for(Categorie cat : Categorie.instances) {
 					if(cat.getNoCategorie()==rs.getInt("noCat")) {
@@ -33,20 +42,48 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				if(categorie==null) {
 					categorie = new Categorie(rs.getInt("noCat"), rs.getString("libelle"));
 				}
-				
-				Enchere enchere = new Enchere();
-				
-				ArticleVendu articleVendu = new ArticleVendu(rs.getInt("noArticle"), rs.getString("nom"), rs.getString("desc"), rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate(), rs.getInt("prixInit"), rs.getInt("prixVente"));
+				//ArticleVendu
+				ArticleVendu articleVendu = null;
+				for(ArticleVendu article : ArticleVendu.instances) {
+					if(article.getNoArticle()==rs.getInt("noArticle")) {
+						articleVendu = article;
+					}
+				}
+				if(articleVendu==null) {
+					articleVendu = new ArticleVendu(rs.getInt("noArticle"), rs.getString("nom"), rs.getString("desc"), rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate(), rs.getInt("prixInit"), rs.getInt("prixVente"));
+				}
 				articleVendu.setLieuRetrait(retrait);
 				articleVendu.setCategorieArticle(categorie);
 				
-				categorie.addArticle(articleVendu);
+				if(!categorie.getArticles().contains(articleVendu)) {
+					categorie.addArticle(articleVendu);
+				}
 				retrait.setArticle(articleVendu);
 				
-				Utilisateur vendeur = new Utilisateur();
+				Utilisateur vendeur = null;
+				for(Utilisateur utilisateur : Utilisateur.instances) {
+					if(utilisateur.getNoUtilisateur()==rs.getInt("noUtil")) {
+						vendeur = utilisateur;
+					}
+				}
+				if(vendeur==null) {
+					vendeur = new Utilisateur();
+				}
+				if(!vendeur.getVentes().contains(articleVendu)) {
+					vendeur.addVente(articleVendu);
+				}
 				articleVendu.setVendeur(vendeur);
 				
 				Utilisateur encherisseur = new Utilisateur();
+				
+				//Enchere
+				Enchere enchere = new Enchere(rs.getDate("date").toLocalDate(), rs.getInt("montant"), articleVendu, encherisseur);
+				if(!articleVendu.getEncheres().contains(enchere)) {
+					articleVendu.addEnchere(enchere);
+				}
+				if(!vendeur.getEncheres().contains(enchere)) {
+					vendeur.addEnchere(enchere);
+				}
 			}
 		}
 		catch (Exception e) {
