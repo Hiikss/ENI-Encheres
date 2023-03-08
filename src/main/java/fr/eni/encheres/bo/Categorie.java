@@ -7,7 +7,8 @@ public class Categorie {
 	private int noCategorie;
 	private String libelle;
 	private List<ArticleVendu> articles;
-	public static List<Categorie> instances;
+	
+	public static List<Categorie> instances = new ArrayList<>();
 	
 	public Categorie() {
 		instances.add(this);
@@ -53,7 +54,6 @@ public class Categorie {
 	public List<ArticleVendu> getArticles() {
 		return articles;
 	}
-
 
 	public void addArticle(ArticleVendu article) {
 		if(articles==null) {

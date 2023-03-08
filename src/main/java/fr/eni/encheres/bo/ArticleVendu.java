@@ -20,12 +20,14 @@ public class ArticleVendu {
 	private Categorie categorieArticle;
 	private List<Enchere> encheres;
 	
+	public static List<ArticleVendu> instances = new ArrayList<>();
+	
 	/**
 	 * 
 	 */
 	public ArticleVendu() {
 		encheres = new ArrayList<>();
-		
+		instances.add(this);
 	}
 		
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente) {
@@ -156,18 +158,14 @@ public class ArticleVendu {
 	public void setCategorieArticle(Categorie categorieArticle) {
 		this.categorieArticle = categorieArticle;
 	}
-	
-	
-	
-	public List<Enchere> getEnchere() {
+		
+	public List<Enchere> getEncheres() {
 		return encheres;
 	}
 
-
-	public void setEnchere(List<Enchere> enchere) {
-		this.encheres = enchere;
+	public void addEnchere(Enchere enchere) {
+		this.encheres.add(enchere);
 	}
-
 
 	@Override
 	public String toString() {
@@ -177,11 +175,4 @@ public class ArticleVendu {
 				+ ", lieuRetrait=" + lieuRetrait + ", categorieArticle=" + categorieArticle + ", enchere=" + encheres
 				+ "]";
 	}
-
-
-	
-	
-	
-	
-
 }

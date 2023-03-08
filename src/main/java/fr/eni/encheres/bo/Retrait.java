@@ -1,5 +1,8 @@
 package fr.eni.encheres.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Retrait {
 	private int noRetrait;
 	private String rue;
@@ -7,19 +10,19 @@ public class Retrait {
 	private String ville;
 	private ArticleVendu article;
 	
+	public static List<Retrait> instances = new ArrayList<>();
 	
 	public Retrait() {
+		instances.add(this);
 	}
 	
-	
-
 	/**
 	 * @param rue
 	 * @param code_postal
 	 * @param ville
 	 */
 	public Retrait(String rue, String code_postal, String ville) {
-		super();
+		this();
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
@@ -33,11 +36,8 @@ public class Retrait {
 	 * @param ville
 	 */
 	public Retrait(int noRetrait, String rue, String code_postal, String ville) {
-		super();
+		this(rue, code_postal, ville);
 		this.noRetrait = noRetrait;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
 	}
 
 	/**
@@ -48,15 +48,9 @@ public class Retrait {
 	 * @param article
 	 */
 	public Retrait(int noRetrait, String rue, String code_postal, String ville, ArticleVendu article) {
-		super();
-		this.noRetrait = noRetrait;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
+		this(noRetrait, rue, code_postal, ville);
 		this.article = article;
 	}
-
-
 
 	/**
 	 * @param rue
@@ -65,26 +59,17 @@ public class Retrait {
 	 * @param article
 	 */
 	public Retrait(String rue, String code_postal, String ville, ArticleVendu article) {
-		super();
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
+		this(rue, code_postal, ville);
 		this.article = article;
 	}
-
-
 
 	public int getNoRetrait() {
 		return noRetrait;
 	}
 
-
-
 	public void setNoRetrait(int noRetrait) {
 		this.noRetrait = noRetrait;
 	}
-
-
 
 	public String getRue() {
 		return rue;
@@ -115,25 +100,14 @@ public class Retrait {
 		return article;
 	}
 
-
-
 	public void setArticle(ArticleVendu article) {
 		this.article = article;
 	}
-
-
 
 	@Override
 	public String toString() {
 		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + ", article=" + article
 				+ "]";
 	}
-
-
-
-	
-	
-	
-	
 
 }
