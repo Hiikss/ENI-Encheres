@@ -74,7 +74,7 @@ public class ServletModifProfil extends HttpServlet {
 			request.setAttribute("listeErreurs", listeErreurs);
 			doGet(request, response);
 		} else {
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 			Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 			try {
 				utilisateurManager.update(utilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
