@@ -168,13 +168,19 @@ public class ArticleVendu {
 	public void setCategorieArticle(Categorie categorieArticle) {
 		this.categorieArticle = categorieArticle;
 	}
-		
+	
+	public void setEncheres(List<Enchere> encheres) {
+		this.encheres = encheres;
+	}
+	
 	public List<Enchere> getEncheres() {
 		return encheres;
 	}
 
 	public void addEnchere(Enchere enchere) {
-		this.encheres.add(enchere);
+		if(!this.encheres.contains(enchere)) {
+			this.encheres.add(enchere);
+		}
 	}
 	
 	public Enchere getMeilleureEnchere() {
