@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bo.ArticleVendu;
 
 /**
@@ -28,8 +29,12 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("recherche", request.getParameter("recherche"));
 		request.setAttribute("categorie", request.getParameter("categorie"));
 		ArticleManager articleManager = ArticleManager.getInstance();
+		EnchereManager enchereManager = EnchereManager.getInstance();
 		try {
 			List<ArticleVendu> articles = articleManager.selectAll();
+			for(ArticleVendu article : articles) {
+				enchereManager.select(article);
+			}
 			request.setAttribute("articles", articles);
 		} catch (BusinessException e) {
 			e.printStackTrace();
