@@ -7,6 +7,8 @@ import fr.eni.encheres.bo.ArticleVendu;
 public interface ArticleDAO {
 	
 	public void insert(ArticleVendu article) throws BusinessException;
+	
+	public ArticleVendu selectById(int id) throws BusinessException;
 
 
 }

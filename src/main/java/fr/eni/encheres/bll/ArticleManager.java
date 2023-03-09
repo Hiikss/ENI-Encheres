@@ -11,7 +11,7 @@ import fr.eni.encheres.dal.DAOFactory;
 
 public class ArticleManager {
 	
-	private ArticleDAO articleDAO;
+	private static ArticleDAO articleDAO;
 	private static ArticleManager instance;
 	
 	public ArticleManager() {
@@ -64,6 +64,11 @@ public class ArticleManager {
 		}
 		
 	
+		
+	}
+	
+	public static ArticleVendu selectById(int id)throws BusinessException{
+		return articleDAO.selectById(id);
 		
 	}
 
