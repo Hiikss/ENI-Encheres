@@ -1,14 +1,13 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Enchere {
 	private LocalDate dateEnchere;
 	private int montantEchere;
 	private ArticleVendu article;
-	private List<Utilisateur> encherisseur;
+	private Utilisateur encherisseur;
 	
 	
 	
@@ -17,7 +16,7 @@ public class Enchere {
 	 * 
 	 */
 	public Enchere() {
-		encherisseur = new ArrayList<>();
+
 		
 	}
 	
@@ -30,13 +29,13 @@ public class Enchere {
 	 * @param article
 	 * @param encherisseur
 	 */
-	public Enchere(LocalDate dateEnchere, int montantEchere, ArticleVendu article, List<Utilisateur> encherisseur) {
+	public Enchere(LocalDate dateEnchere, int montantEchere, ArticleVendu article, Utilisateur encherisseur) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEchere = montantEchere;
 		this.article = article;
 		this.encherisseur = encherisseur;
-		encherisseur = new ArrayList<>();
+
 	}
 
 
@@ -65,14 +64,14 @@ public class Enchere {
 	
 	
 	
-	public List<Utilisateur> getEncherisseur() {
+	public Utilisateur getEncherisseur() {
 		return encherisseur;
 	}
 
 
 
 
-	public void setEncherisseur(List<Utilisateur> encherisseur) {
+	public void setEncherisseur(Utilisateur encherisseur) {
 		this.encherisseur = encherisseur;
 	}
 

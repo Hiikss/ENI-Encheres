@@ -13,9 +13,9 @@ import fr.eni.encheres.bo.Utilisateur;
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT ="insert into Articles_Vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES(?,?,?,?,?,?,?);";
-	private static final String SelectById = "Select * FROM Articlesè=_Vendus WHERE no-article = ?";
+	private static final String SelectById = "Select * FROM Articles_Vendus WHERE no_article = ?";
 	//private static final String INSERT = "INSERT INTO Articles_Vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES(?,?,?,?,?,?,?,?);";
-
+	private static final String UPDATE_ARTICLE = "UPDATE Articles_Vendus SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
 
 	@Override
 	public void insert(ArticleVendu article) throws BusinessException {
@@ -125,6 +125,33 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 		}
 		return cArticle;
+	}
+
+
+	@Override
+	public void update(ArticleVendu article) throws BusinessException {
+		BusinessException be = new BusinessException();
+
+ 		try (Connection cnx = ConnectionProvider.getConnection()) {
+ 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_ARTICLE);
+ 			pstmt.setString(1, article.getNomArticle());
+ 			pstmt.setString(2, article.getDescription());
+ 			pstmt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
+			pstmt.setDate(4, java.sql.Date.valueOf(article.getDateFinEncheres()));
+			pstmt.setInt(5, article.getMiseAPrix());
+			pstmt.setInt(6, article.getPrixVente());
+			pstmt.setInt(7, article.getVendeur().getNoUtilisateur());
+			pstmt.setInt(8, article.getCategorieArticle().getNoCategorie());
+			
+			pstmt.executeUpdate();
+ 			
+ 		}catch (Exception e) {
+			e.printStackTrace();
+			if (e instanceof BusinessException) {
+				throw be;
+			}
+			throw new BusinessException(CodesResultatDAL.UPDATE_UTILISATEUR_ECHEC);
+		}
 	}
 
 }

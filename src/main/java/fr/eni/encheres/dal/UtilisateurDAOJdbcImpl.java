@@ -14,7 +14,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_PSEUDO_BY_ID = "SELECT * FROM Utilisateurs WHERE pseudo=? AND no_utilisateur!=?";
 	private static final String SELECT_EMAIL_BY_ID = "SELECT * FROM Utilisateurs WHERE email=? AND no_utilisateur!=?";
 	private static final String INSERT = "INSERT INTO Utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
-	private static final String UPDATE_UTILISATEUR = "UPDATE Utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
+	private static final String UPDATE_UTILISATEUR = "UPDATE Utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit =? WHERE no_utilisateur=?";
 	private static final String SELECT_BY_ID ="SELECT * FROM Utilisateurs where no_utilisateur =?";
 	private static final String SE_CONNECTER = "SELECT * FROM Utilisateurs WHERE (pseudo=? or email=?) AND mot_de_passe=?";
 	private static final String DELETE = "DELETE FROM Utilisateurs WHERE no_utilisateur=?";
@@ -171,6 +171,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				pstmt.setString(8, utilisateur.getVille());
 				pstmt.setBytes(9, utilisateur.getMotDePasse());
 				pstmt.setInt(10, utilisateur.getNoUtilisateur());
+				pstmt.setInt(11, utilisateur.getCredit());
 				pstmt.executeUpdate();
 			}
 
