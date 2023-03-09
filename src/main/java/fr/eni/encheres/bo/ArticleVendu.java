@@ -190,6 +190,18 @@ public class ArticleVendu {
 	}
 
 
+	public void setVendeur(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setLieuRetrait(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 	
 	

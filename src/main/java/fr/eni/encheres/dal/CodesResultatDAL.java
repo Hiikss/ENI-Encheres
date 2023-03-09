@@ -23,5 +23,7 @@ public abstract class CodesResultatDAL {
 		public static final int UPDATE_UTILISATEUR_ECHEC=10007;
 
 		public static final int DELETE_UTILISATEUR_ECHEC = 10009;
+		
+		public static final int SELECT_ARTICLE_VENDU_ECHEC = 10010;
 
 }

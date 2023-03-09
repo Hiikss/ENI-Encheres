@@ -88,6 +88,14 @@ public class Enchere {
 
 
 
+	public void setArticle(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 	
 	
 	
