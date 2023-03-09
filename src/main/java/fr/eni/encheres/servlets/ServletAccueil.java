@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bll.ArticleManager;
-import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bo.ArticleVendu;
-import fr.eni.encheres.bo.Enchere;
 
 /**
  * Servlet implementation class ServletAccueil
@@ -27,6 +25,8 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("recherche", request.getParameter("recherche"));
+		request.setAttribute("categorie", request.getParameter("categorie"));
 		ArticleManager articleManager = ArticleManager.getInstance();
 		try {
 			List<ArticleVendu> articles = articleManager.selectAll();
