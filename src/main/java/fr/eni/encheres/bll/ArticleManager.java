@@ -1,9 +1,11 @@
 package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticleDAO;
@@ -48,6 +50,10 @@ public class ArticleManager {
 		System.out.println(article.toString());
 		
 		return article;
+	}
+	
+	public List<ArticleVendu> selectAll() throws BusinessException {
+		return this.articleDAO.selectAll();
 	}
 	
 	public void validerArticle(ArticleVendu article,BusinessException businessException) throws BusinessException{

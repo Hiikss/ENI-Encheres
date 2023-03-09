@@ -11,6 +11,7 @@ public class Categorie {
 	public static List<Categorie> instances = new ArrayList<>();
 	
 	public Categorie() {
+		articles = new ArrayList<>();
 		instances.add(this);
 	}
 
