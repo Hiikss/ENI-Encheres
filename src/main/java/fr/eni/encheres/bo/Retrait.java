@@ -1,19 +1,12 @@
 package fr.eni.encheres.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Retrait {
-	private int noRetrait;
 	private String rue;
 	private String code_postal;
 	private String ville;
 	private ArticleVendu article;
 	
-	public static List<Retrait> instances = new ArrayList<>();
-	
 	public Retrait() {
-		instances.add(this);
 	}
 	
 	/**
@@ -29,30 +22,6 @@ public class Retrait {
 	}
 
 	/**
-	 * 
-	 * @param noRetrait
-	 * @param rue
-	 * @param code_postal
-	 * @param ville
-	 */
-	public Retrait(int noRetrait, String rue, String code_postal, String ville) {
-		this(rue, code_postal, ville);
-		this.noRetrait = noRetrait;
-	}
-
-	/**
-	 * @param noRetrait
-	 * @param rue
-	 * @param code_postal
-	 * @param ville
-	 * @param article
-	 */
-	public Retrait(int noRetrait, String rue, String code_postal, String ville, ArticleVendu article) {
-		this(noRetrait, rue, code_postal, ville);
-		this.article = article;
-	}
-
-	/**
 	 * @param rue
 	 * @param code_postal
 	 * @param ville
@@ -61,24 +30,6 @@ public class Retrait {
 	public Retrait(String rue, String code_postal, String ville, ArticleVendu article) {
 		this(rue, code_postal, ville);
 		this.article = article;
-	}
-
-	public static Retrait getRetraitIfExists(int no) {
-		Retrait retrait = null;
-		for(Retrait r : instances) {
-			if(r.getNoRetrait()==no) {
-				retrait = r;
-			}
-		}
-		return retrait;
-	}
-	
-	public int getNoRetrait() {
-		return noRetrait;
-	}
-
-	public void setNoRetrait(int noRetrait) {
-		this.noRetrait = noRetrait;
 	}
 
 	public String getRue() {
