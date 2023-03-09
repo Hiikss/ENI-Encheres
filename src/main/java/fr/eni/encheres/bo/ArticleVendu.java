@@ -93,6 +93,16 @@ public class ArticleVendu {
 				lieuRetrait, categorieArticle, encheres);
 		this.noArticle = noArticle;
 	}
+	
+	public static ArticleVendu getArticleIfExists(int no) {
+		ArticleVendu articleVendu = null;
+		for(ArticleVendu article : instances) {
+			if(article.getNoArticle()==no) {
+				articleVendu = article;
+			}
+		}
+		return articleVendu;
+	}
 
 	public int getNoArticle() {
 		return noArticle;
@@ -189,7 +199,16 @@ public class ArticleVendu {
 	public void addEnchere(Enchere enchere) {
 		this.encheres.add(enchere);
 	}
-
+	
+	public Enchere getMeilleureEnchere() {
+        Enchere meilleureEnchere = null;
+        for(Enchere enchere : encheres) {
+            if(enchere.getMontantEchere()>meilleureEnchere.getMontantEchere() || meilleureEnchere==null) {
+                meilleureEnchere = enchere;
+            }
+        }
+        return meilleureEnchere;
+    }
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description

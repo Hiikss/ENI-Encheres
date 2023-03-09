@@ -26,4 +26,5 @@ public class EnchereManager {
 	public List<Enchere> selectAll() throws BusinessException {
 		return this.enchererDAO.selectAll();
 	}
+
 }

@@ -11,6 +11,7 @@ public class Categorie {
 	public static List<Categorie> instances = new ArrayList<>();
 	
 	public Categorie() {
+		articles = new ArrayList<>();
 		instances.add(this);
 	}
 
@@ -35,6 +36,16 @@ public class Categorie {
 		addArticle(article);
 	}
 
+	public static Categorie getCategorieIfExists(int no) {
+		Categorie categorie = null;
+		for(Categorie cat : instances) {
+			if(cat.getNoCategorie()==no) {
+				categorie = cat;
+			}
+		}
+		return categorie;
+	}
+	
 	public int getNoCategorie() {
 		return noCategorie;
 	}

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="fr.eni.encheres.bo.ArticleVendu"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<style><%@include file="/WEB-INF/css/style.css"%></style>
 <title>Accueil</title>
 </head>
 <body>
@@ -24,7 +27,7 @@
 			else {
         %>
         	<a class="nav-link" href=".">Enchères</a>
-        	<a class="nav-link" href=".">Vendre un article</a>
+        	<a class="nav-link" href="<%=request.getContextPath()%>/NouvelleVente">Vendre un article</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/profil">Mon profil</a>
         	<a class="nav-link" href="<%=request.getContextPath()%>/logout">Déconnexion</a>
         <%
@@ -145,6 +148,28 @@
 			</article>
 		</div>
 	</form>
+	<% List<ArticleVendu> articles = (List<ArticleVendu>) request.getAttribute("articles");
+	if(articles!=null) {
+		%>
+		<div class="row">
+		<%
+		for(ArticleVendu article : articles) {
+			%>
+			<article class="col-4 article">
+				<a href=".">
+					<div><%=article.getNomArticle() %></div>
+					<div>Prix : <%=article.getMiseAPrix() %></div>
+					<div>Fin de l'enchère : <%=article.getDateFinEncheres() %></div>
+					<div>Vendeur : <%=article.getVendeur().getPseudo() %></div>
+				</a>
+			</article>
+			<%
+		}
+		%>
+		</div>
+		<%
+	}
+	%>
 </section>
 </body>
 </html>

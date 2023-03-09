@@ -50,7 +50,7 @@ public class ServletProfil extends HttpServlet {
 		
 		request.setAttribute("ok", uSession);
 		request.setAttribute("utilisateur", utilisateur);
-		request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/Profil.jsp").forward(request, response);
 	}
 
 	/**

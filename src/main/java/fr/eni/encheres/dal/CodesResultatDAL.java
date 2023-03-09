@@ -20,10 +20,16 @@ public abstract class CodesResultatDAL {
 		
 		public static final int INSERT_ARTICLE_ECHEC = 10008;
 
-		public static final int UPDATE_UTILISATEUR_ECHEC=10007;
+		public static final int UPDATE_UTILISATEUR_ECHEC=10009;
 
-		public static final int DELETE_UTILISATEUR_ECHEC = 10009;
+		public static final int DELETE_UTILISATEUR_ECHEC = 10010;
 		
-		public static final int SELECT_ARTICLE_VENDU_ECHEC = 10010;
+		public static final int INSERT_RETRAIT_ECHEC = 10011;
+		
+		public static final int LECTURE_RETRAIT_ECHEC = 10012;
+		
+		public static final int LECTURE_CATEGORIE_ECHEC = 10013;
+		
+		public static final int LECTURE_ALLCATEGORIES_ECHEC = 10014;
 
 }
