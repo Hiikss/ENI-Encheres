@@ -144,6 +144,16 @@ public class Utilisateur {
 		vente = new ArrayList<>();
 		encherit = new ArrayList<>();
 	}
+	
+	public static Utilisateur getUtilisateurIfExists(int no) {
+		Utilisateur utilisateur = null;
+		for(Utilisateur u : instances) {
+			if(u.getNoUtilisateur()==no) {
+				utilisateur = u;
+			}
+		}
+		return utilisateur;
+	}
 
 	public int getNoUtilisateur() {
 		return noUtilisateur;

@@ -63,6 +63,16 @@ public class Retrait {
 		this.article = article;
 	}
 
+	public static Retrait getRetraitIfExists(int no) {
+		Retrait retrait = null;
+		for(Retrait r : instances) {
+			if(r.getNoRetrait()==no) {
+				retrait = r;
+			}
+		}
+		return retrait;
+	}
+	
 	public int getNoRetrait() {
 		return noRetrait;
 	}

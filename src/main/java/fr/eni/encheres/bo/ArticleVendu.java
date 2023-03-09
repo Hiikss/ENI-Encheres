@@ -91,6 +91,16 @@ public class ArticleVendu {
 		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente, vendeur, lieuRetrait, categorieArticle, encheres);
 		this.noArticle = noArticle;
 	}
+	
+	public static ArticleVendu getArticleIfExists(int no) {
+		ArticleVendu articleVendu = null;
+		for(ArticleVendu article : instances) {
+			if(article.getNoArticle()==no) {
+				articleVendu = article;
+			}
+		}
+		return articleVendu;
+	}
 
 	public int getNoArticle() {
 		return noArticle;
