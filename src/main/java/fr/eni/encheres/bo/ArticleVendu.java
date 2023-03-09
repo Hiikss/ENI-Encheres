@@ -176,6 +176,16 @@ public class ArticleVendu {
 	public void addEnchere(Enchere enchere) {
 		this.encheres.add(enchere);
 	}
+	
+	public Enchere getMeilleureEnchere() {
+		Enchere meilleureEnchere = null;
+		for(Enchere enchere : encheres) {
+			if(enchere.getMontantEchere()>meilleureEnchere.getMontantEchere() || meilleureEnchere==null) {
+				meilleureEnchere = enchere;
+			}
+		}
+		return meilleureEnchere;
+	}
 
 	@Override
 	public String toString() {
