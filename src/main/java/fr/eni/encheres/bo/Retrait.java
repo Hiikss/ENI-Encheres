@@ -1,18 +1,15 @@
 package fr.eni.encheres.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Retrait {
-	private int noRetrait;
+	private ArticleVendu article;
 	private String rue;
 	private String code_postal;
 	private String ville;
-	private List<ArticleVendu> article;
+
 	
 	
 	public Retrait() {
-		article = new ArrayList<>();
+		
 	}
 	
 	
@@ -30,51 +27,18 @@ public class Retrait {
 	}
 
 
-
 	/**
-	 * @param noRetrait
+	 * @param article
 	 * @param rue
 	 * @param code_postal
 	 * @param ville
-	 * @param article
 	 */
-	public Retrait(int noRetrait, String rue, String code_postal, String ville, List<ArticleVendu> article) {
+	public Retrait(ArticleVendu article, String rue, String code_postal, String ville) {
 		super();
-		this.noRetrait = noRetrait;
+		this.article = article;
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
-		this.article = article;
-		article = new ArrayList<>();
-	}
-
-
-
-	/**
-	 * @param rue
-	 * @param code_postal
-	 * @param ville
-	 * @param article
-	 */
-	public Retrait(String rue, String code_postal, String ville, List<ArticleVendu> article) {
-		super();
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.article = article;
-		article = new ArrayList<>();
-	}
-
-
-
-	public int getNoRetrait() {
-		return noRetrait;
-	}
-
-
-
-	public void setNoRetrait(int noRetrait) {
-		this.noRetrait = noRetrait;
 	}
 
 
@@ -102,15 +66,16 @@ public class Retrait {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	
 
-	public List<ArticleVendu> getArticle() {
+
+
+	public ArticleVendu getArticle() {
 		return article;
 	}
 
 
 
-	public void setArticle(List<ArticleVendu> article) {
+	public void setArticle(ArticleVendu article) {
 		this.article = article;
 	}
 
@@ -118,9 +83,13 @@ public class Retrait {
 
 	@Override
 	public String toString() {
-		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + ", article=" + article
+		return "Retrait [article=" + article + ", rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville
 				+ "]";
 	}
+	
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 package fr.eni.encheres.bll;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.RetraitDAO;
 import fr.eni.encheres.dal.RetraitDAOJdbcImpl;
@@ -27,11 +28,12 @@ public class RetraitManager {
 		return retrait;
 		
 	}
-
-	public static Retrait selectionnerRetraitById(int id) throws BusinessException {
-		return retraitDAO.SelectById(id);
-	}
 	
+	public Retrait selectByNoArticle(ArticleVendu a) throws BusinessException{
+	
+		return this.retraitDAO.SelectByArticle(a);
+	}
+
 	
 	
 	private static void validerAdresse(Retrait retrait, BusinessException be) {
