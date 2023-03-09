@@ -23,32 +23,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				//Retrait
-				Retrait retrait = null;
-				for(Retrait r : Retrait.instances) {
-					if(r.getNoRetrait()==rs.getInt("noRetrait")) {
-						retrait = r;
-					}
-				}
+				Retrait retrait = Retrait.getRetraitIfExists(rs.getInt("noRetrait"));
 				if(retrait==null) {
 					retrait = new Retrait(rs.getInt("noRetrait"), rs.getString("rue"), rs.getString("cp"), rs.getString("ville"));
 				}
 				//Categorie
-				Categorie categorie = null;
-				for(Categorie cat : Categorie.instances) {
-					if(cat.getNoCategorie()==rs.getInt("noCat")) {
-						categorie = cat;
-					}
-				}
+				Categorie categorie = Categorie.getCategorieIfExists(rs.getInt("noCat"));
 				if(categorie==null) {
 					categorie = new Categorie(rs.getInt("noCat"), rs.getString("libelle"));
 				}
 				//ArticleVendu
-				ArticleVendu articleVendu = null;
-				for(ArticleVendu article : ArticleVendu.instances) {
-					if(article.getNoArticle()==rs.getInt("noArticle")) {
-						articleVendu = article;
-					}
-				}
+				ArticleVendu articleVendu = ArticleVendu.getArticleIfExists(rs.getInt("noArticle"));
 				if(articleVendu==null) {
 					articleVendu = new ArticleVendu(rs.getInt("noArticle"), rs.getString("nom"), rs.getString("desc"), rs.getDate("debut").toLocalDate(), rs.getDate("fin").toLocalDate(), rs.getInt("prixInit"), rs.getInt("prixVente"));
 				}
@@ -60,12 +45,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				}
 				retrait.setArticle(articleVendu);
 				
-				Utilisateur vendeur = null;
-				for(Utilisateur utilisateur : Utilisateur.instances) {
-					if(utilisateur.getNoUtilisateur()==rs.getInt("noUtil")) {
-						vendeur = utilisateur;
-					}
-				}
+				Utilisateur vendeur = Utilisateur.getUtilisateurIfExists(rs.getInt("noUtil"));
 				if(vendeur==null) {
 					vendeur = new Utilisateur();
 				}
