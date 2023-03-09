@@ -72,7 +72,7 @@ public class ServletSignUp extends HttpServlet {
 			doGet(request, response);
 		}
 		else {
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 			Utilisateur utilisateur;
 			try {
 				utilisateur = utilisateurManager.insert(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);

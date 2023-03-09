@@ -37,7 +37,7 @@ public class ServletProfil extends HttpServlet {
 		boolean uSession = true;
 		if (request.getParameter("id") != null){
 			int id = Integer.parseInt(request.getParameter("id"));			
-			if(id != utilisateur.getNoUtilisateur()) {
+			if(utilisateur==null || id!=utilisateur.getNoUtilisateur()) {
 				uSession = false;
 				UtilisateurManager um = UtilisateurManager.getInstance();
 				try {
