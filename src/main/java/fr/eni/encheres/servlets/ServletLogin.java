@@ -47,7 +47,7 @@ public class ServletLogin extends HttpServlet {
 		}
 		byte[] mdp = digest.digest(request.getParameter("motDePasse").getBytes(StandardCharsets.UTF_8));
 		
-		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
+		UtilisateurManager utilisateurManager = UtilisateurManager.getInstance(); 
 		try {
 			Utilisateur utilisateur = utilisateurManager.seConnecter(identifiant, mdp);
 			session.setAttribute("utilisateur", utilisateur);

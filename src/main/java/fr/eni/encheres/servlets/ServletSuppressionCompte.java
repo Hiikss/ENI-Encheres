@@ -24,7 +24,7 @@ public class ServletSuppressionCompte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		UtilisateurManager utilisateurManager = new UtilisateurManager(); 
+		UtilisateurManager utilisateurManager = UtilisateurManager.getInstance(); 
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		try {
 			utilisateurManager.delete(utilisateur);

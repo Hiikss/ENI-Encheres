@@ -13,38 +13,37 @@
 	<a href="<%=request.getContextPath()%>/accueil" class="navbar-brand">ENI-Encheres</a>
 </nav>
 <section class="container">
-		<%Utilisateur utilisateur =(Utilisateur) request.getAttribute("utilisateur"); %>
 		<div class="row mt-5">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Pseudo : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getPseudo() %> </div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Pseudo :</div>
+			<div class="col-6 col-lg-3">${utilisateur.pseudo}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Nom : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getNom() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Nom :</div>
+			<div class="col-6 col-lg-3">${utilisateur.nom}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Prénom : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getPrenom() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Prénom :</div>
+			<div class="col-6 col-lg-3">${utilisateur.prenom}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Email : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getEmail() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Email :</div>
+			<div class="col-6 col-lg-3">${utilisateur.email}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Telephone : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getTelephone() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Telephone :</div>
+			<div class="col-6 col-lg-3">${utilisateur.telephone}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Rue : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getRue() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Rue :</div>
+			<div class="col-6 col-lg-3">${utilisateur.rue}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Code Postal : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getCodePostal() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Code Postal :</div>
+			<div class="col-6 col-lg-3">${utilisateur.codePostal}</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Ville : </div>
-			<div class="col-6 col-lg-3"><%=utilisateur.getVille() %></div>
+			<div class="col-4 col-lg-2 offset-1 offset-lg-4">Ville :</div>
+			<div class="col-6 col-lg-3">${utilisateur.ville}</div>
 		</div>
 			
 		<% if(request.getAttribute("ok") != null){

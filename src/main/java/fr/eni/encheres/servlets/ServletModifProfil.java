@@ -1,7 +1,6 @@
 package fr.eni.encheres.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +12,6 @@ import fr.eni.encheres.bll.UtilisateurManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +29,7 @@ import fr.eni.encheres.bo.Utilisateur;
 public class ServletModifProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/modificationProfil.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -43,8 +38,7 @@ public class ServletModifProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Récupération des paramètres du formulaire
 		HttpSession session = request.getSession();
 		// Récupération des paramètres
@@ -80,7 +74,7 @@ public class ServletModifProfil extends HttpServlet {
 			request.setAttribute("listeErreurs", listeErreurs);
 			doGet(request, response);
 		} else {
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 			Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 			try {
 				utilisateurManager.update(utilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
