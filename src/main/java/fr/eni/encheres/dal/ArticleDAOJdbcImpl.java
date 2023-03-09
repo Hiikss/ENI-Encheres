@@ -10,7 +10,7 @@ import fr.eni.encheres.bo.Categorie;
 
 import fr.eni.encheres.bo.Utilisateur;
 
-public abstract class ArticleDAOJdbcImpl implements ArticleDAO {
+public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT ="insert into Articles_Vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES(?,?,?,?,?,?,?);";
 	private static final String SelectById = "Select * FROM Articlesè=_Vendus WHERE no-article = ?";
