@@ -7,13 +7,14 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
 
 public class ArticleManager {
 	
-	private ArticleDAO articleDAO;
+	private static ArticleDAO articleDAO;
 	private static ArticleManager instance;
 	
 	public ArticleManager() {
@@ -72,5 +73,23 @@ public class ArticleManager {
 	
 		
 	}
+	
+	public static ArticleVendu selectById(int id)throws BusinessException{
+		return articleDAO.selectById(id);
+		
+	}
+	
+	public void update(ArticleVendu article) throws BusinessException{
+		BusinessException be = new BusinessException();
+		this.validerArticle(article, be);
+		
+		if (!be.hasErreurs()) {
+			this.articleDAO.update(article);
+		} else {
+			throw be;
+		}
+		System.out.println(article.toString());
+	}
+	
 
 }

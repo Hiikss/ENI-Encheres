@@ -104,7 +104,27 @@ public class UtilisateurManager {
 		System.out.println(utilisateur.toString());
 
 	}
+	
+	public void updateCredit(Utilisateur utilisateur) throws BusinessException{
+		BusinessException be = new BusinessException();
+		this.validerCredit(utilisateur.getCredit(), be);
+		
+		if (!be.hasErreurs()) {
+			this.utilisateurDAO.update(utilisateur);
+		} else {
+			throw be;
+		}
+		System.out.println(utilisateur.toString());
+	}
+	
+	
+	private void validerCredit(int credit, BusinessException be) {
+		if(credit <0) {
+			be.ajouterErreur(CodesResultatBLL.CREDIT_NEGATIF_ERREUR);
+		}
+	}
 
+	
 	private void validerComparaisonMdp(byte[] mdpActuel, byte[] mdpSaisi, BusinessException businessException) {
 		if (!Arrays.equals(mdpActuel, mdpSaisi)) {
 			businessException.ajouterErreur(CodesResultatBLL.MDP_COMPARAISON_ERREUR);

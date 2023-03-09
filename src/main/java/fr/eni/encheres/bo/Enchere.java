@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Enchere {
 	private LocalDate dateEnchere;
 	private int montantEchere;
@@ -16,7 +17,9 @@ public class Enchere {
 	 * 
 	 */
 	public Enchere() {
+
 		instances.add(this);
+
 	}
 
 	/**
@@ -26,11 +29,14 @@ public class Enchere {
 	 * @param encherisseur
 	 */
 	public Enchere(LocalDate dateEnchere, int montantEchere, ArticleVendu article, Utilisateur encherisseur) {
+
 		this();
+
 		this.dateEnchere = dateEnchere;
 		this.montantEchere = montantEchere;
 		this.article = article;
 		this.encherisseur = encherisseur;
+
 	}
 
 	public LocalDate getDateEnchere() {
@@ -60,6 +66,7 @@ public class Enchere {
 	public Utilisateur getEncherisseur() {
 		return encherisseur;
 	}
+
 
 	public void setEncherisseur(Utilisateur encherisseur) {
 		this.encherisseur = encherisseur;

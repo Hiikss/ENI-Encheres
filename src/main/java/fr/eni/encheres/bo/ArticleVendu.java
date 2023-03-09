@@ -213,7 +213,7 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", vendeur=" + vendeur
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente
 				+ ", lieuRetrait=" + lieuRetrait + ", categorieArticle=" + categorieArticle + ", enchere=" + encheres
 				+ "]";
 	}
