@@ -9,7 +9,7 @@ import fr.eni.encheres.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO{
 	
-	private static final String INSERT = "insert into RETRAITS (rue, code_postal, ville) values (?,?,?);";
+	private static final String INSERT = "insert into RETRAITS (no_retrait, rue, code_postal, ville) values (?,?,?,?);";
 	private static final String SELECTBYID ="Select * FROM Retraits where no_retrait =?";
 
 	@Override

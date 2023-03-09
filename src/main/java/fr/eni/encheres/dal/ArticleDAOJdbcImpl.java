@@ -8,9 +8,9 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
-//	public static final String INSERT ="insert into Articles_Vendus (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUE(?,?,?,?,?,?,?,?);";
+	private static final String INSERT ="insert into Articles_Vendus (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUE(?,?,?,?,?,?,?,?);";
 
-	private static final String INSERT = "INSERT INTO Articles_Vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES(?,?,?,?,?,?,?,?);";
+//	private static final String INSERT = "INSERT INTO Articles_Vendus(no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES(?,?,?,?,?,?,?,?);";
 
 	@Override
 	public void insert(ArticleVendu article) throws BusinessException {
@@ -30,7 +30,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				pstmt.setInt(5, article.getMiseAPrix());
 				pstmt.setInt(6, article.getVendeur().getNoUtilisateur());
 				pstmt.setInt(7, article.getCategorieArticle().getNoCategorie());
-				pstmt.setInt(8, article.getLieuRetrait().getNoRetrait());
+				//pstmt.setInt(8, article.getLieuRetrait().getNoRetrait());
 				
 				pstmt.executeUpdate();
 				rs = pstmt.getGeneratedKeys();
