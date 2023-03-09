@@ -78,12 +78,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		Categorie categorie = CategorieManager.SelectCategorieById(categerieId);
 		
 			
-		retrait = new Retrait();
-		retrait.setRue(rue);
-		retrait.setCode_postal(codePostal);
-		retrait.setVille(ville);
 		
-			RetraitManager.insertRetrait(retrait);
 
 		
 		//S'il y a des erreurs, renvoie la page de vente avec les erreurs
@@ -100,11 +95,19 @@ public class ServletNouvelleVente extends HttpServlet {
 				article.setDateFinEncheres(dateFinEnchere);
 				article.setMiseAPrix(miseAPrix);
 				article.setCategorieArticle(categorie);
-				article.setLieuRetrait(retrait);
+				
 				article.setVendeur(utilisateur);
 				
 				ArticleManager articleManager = new ArticleManager();
 				articleManager.insert(article);
+				
+				retrait = new Retrait();
+				retrait.setRue(rue);
+				retrait.setCode_postal(codePostal);
+				retrait.setVille(ville);
+				retrait.setArticle(article);
+				
+					RetraitManager.insertRetrait(retrait);
 				session.setAttribute("utilisateur", utilisateur);
 				response.sendRedirect(request.getContextPath() + "/accueil");
 			} catch (BusinessException e) {

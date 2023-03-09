@@ -8,9 +8,11 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
-	private static final String INSERT ="insert into Articles_Vendus (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUE(?,?,?,?,?,?,?,?);";
 
-//	private static final String INSERT = "INSERT INTO Articles_Vendus(no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES(?,?,?,?,?,?,?,?);";
+	private static final String INSERT ="insert into Articles_Vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES(?,?,?,?,?,?,?);";
+
+	//private static final String INSERT = "INSERT INTO Articles_Vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES(?,?,?,?,?,?,?,?);";
+
 
 	@Override
 	public void insert(ArticleVendu article) throws BusinessException {
@@ -21,7 +23,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			
 				PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-				ResultSet rs = pstmt.executeQuery();
+
 				
 				pstmt.setString(1, article.getNomArticle());
 				pstmt.setString(2, article.getDescription());
@@ -33,7 +35,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				//pstmt.setInt(8, article.getLieuRetrait().getNoRetrait());
 				
 				pstmt.executeUpdate();
-				rs = pstmt.getGeneratedKeys();
+				ResultSet rs = pstmt.getGeneratedKeys();
 				if(rs.next()) {
 					article.setNoArticle(rs.getInt(1));
 				}

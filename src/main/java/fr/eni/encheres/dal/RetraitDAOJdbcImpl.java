@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO{
 	
-	private static final String INSERT = "insert into RETRAITS (no_retrait, rue, code_postal, ville) values (?,?,?,?);";
-	private static final String SELECTBYID ="Select * FROM Retraits where no_retrait =?";
+
+	private static final String INSERT = "insert into RETRAITS (no_article, rue, code_postal, ville) values (?,?,?,?);";
+	private static final String SELECTBYARTICLE ="Select * FROM Retraits where no_article =?";
+
 
 	@Override
 	public void insert(Retrait retrait) throws BusinessException {
@@ -22,17 +25,15 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 		}
 		
 		try(Connection cnx = ConnectionProvider.getConnection()){
-			PreparedStatement stmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, retrait.getRue());
-			stmt.setString(2, retrait.getCode_postal());
-			stmt.setString(3, retrait.getVille());
+			PreparedStatement stmt = cnx.prepareStatement(INSERT);
+			stmt.setInt(1, retrait.getArticle().getNoArticle());
+			stmt.setString(2, retrait.getRue());
+			stmt.setString(3, retrait.getCode_postal());
+			stmt.setString(4, retrait.getVille());
 			
 			stmt.executeUpdate();
 			
-			ResultSet rs = stmt.getGeneratedKeys();
-					if(rs.next()) {
-						retrait.setNoRetrait(1);
-					}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			if(e instanceof BusinessException) {
@@ -44,21 +45,18 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 	}
 
 	@Override
-	public Retrait SelectById(int id) throws BusinessException {
+	public Retrait SelectByArticle(ArticleVendu a) throws BusinessException {
 		
 		Retrait retrait = null;
 		
 		try(Connection cnx = ConnectionProvider.getConnection()){
-			PreparedStatement stmt = cnx.prepareStatement(SELECTBYID);
-			stmt.setInt(1, id);
+			PreparedStatement stmt = cnx.prepareStatement(SELECTBYARTICLE);
+			stmt.setInt(1, a.getNoArticle());
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
-				retrait = new Retrait();
-				retrait.setNoRetrait(rs.getInt("no_retrait"));
-				retrait.setRue(rs.getString("rue"));
-				retrait.setCode_postal(rs.getString("code_postal"));
-				retrait.setVille(rs.getString("ville"));
+				retrait = new Retrait(a, rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
