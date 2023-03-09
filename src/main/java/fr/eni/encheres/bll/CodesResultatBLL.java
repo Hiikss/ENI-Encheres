@@ -29,5 +29,7 @@ public class CodesResultatBLL {
 	public static final int REGLE_ARTICLE_DATE_ERREUR = 20012;
 	
 	public static final int REGLE_RETRAITS_ADRESSE_ERREUR = 20013;
+	
+	public static final int CREDIT_NEGATIF_ERREUR = 20014;
 
 }
