@@ -248,7 +248,9 @@ public class Utilisateur {
 	}
 
 	public void addVente(ArticleVendu vente) {
+		if(!this.ventes.contains(vente)) {
 		this.ventes.add(vente);
+		}
 	}
 
 	public List<Enchere> getEncheres() {
@@ -256,7 +258,9 @@ public class Utilisateur {
 	}
 
 	public void addEnchere(Enchere enchere) {
-		this.encheres.add(enchere);
+		if(!this.encheres.contains(enchere)) {
+			this.encheres.add(enchere);
+		}
 	}
 
 	public boolean isAdministrateur() {

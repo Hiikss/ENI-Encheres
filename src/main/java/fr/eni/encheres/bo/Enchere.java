@@ -38,6 +38,16 @@ public class Enchere {
 		this.encherisseur = encherisseur;
 
 	}
+	
+	public static Enchere getEnchereIfExists(LocalDate dateEnchere, int montant, ArticleVendu article, Utilisateur encherisseur) {
+		Enchere enchere = null;
+		for(Enchere e : instances) {
+			if(e.getDateEnchere().equals(dateEnchere) && e.getMontantEchere()==montant && e.getArticle()==article && e.getEncherisseur()==encherisseur) {
+		    	enchere = e;
+			}
+		}
+		return enchere;
+	}
 
 	public LocalDate getDateEnchere() {
 		return dateEnchere;
@@ -67,6 +77,7 @@ public class Enchere {
 	public void setEncherisseur(Utilisateur encherisseur) {
 		this.encherisseur = encherisseur;
 	}
+
 
 	@Override
 	public String toString() {
