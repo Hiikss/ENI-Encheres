@@ -53,14 +53,8 @@ public class ServletEncherir extends HttpServlet {
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		
 		ArticleVendu article = null;
-		try {
-			article = ArticleManager.selectById(noArticle);
-		} catch (BusinessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		 
-		
+		article = ArticleVendu.getArticleIfExists(noArticle);
+
 		if (article != null && prixEnchere > article.getMiseAPrix()
 				&& utilisateurConnecte.getCredit() >= prixEnchere) {
 			Enchere enchere = new Enchere(LocalDate.now(), prixEnchere, article, utilisateurConnecte);
