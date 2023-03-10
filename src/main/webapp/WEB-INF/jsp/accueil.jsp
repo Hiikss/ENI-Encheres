@@ -167,7 +167,7 @@ if(request.getParameter("categorie")!=null) {
 			%>
 				<article class="col-10 col-lg-5 offset-1 offset-lg-0 article mt-4">
 					<%if(session.getAttribute("utilisateur")!=null) {%>
-					<a href="<%=request.getContextPath()%>/DetailVente?=noArticle=<%=article.getNoArticle()%>">
+					<a href="<%=request.getContextPath()%>/DetailVente?noArticle=<%=article.getNoArticle()%>">
 					<%}%>
 						<div><u><%=article.getNomArticle() %></u></div>
 						<div>Prix : <%=article.getMiseAPrix()%> points</div>

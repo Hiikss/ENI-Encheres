@@ -41,7 +41,6 @@ public class UtilisateurManager {
 
 		this.utilisateurDAO.seConnecter(utilisateur);
 
-		System.out.println(utilisateur.toString());
 		return utilisateur;
 	}
 

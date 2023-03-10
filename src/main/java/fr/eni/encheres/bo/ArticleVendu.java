@@ -184,7 +184,7 @@ public class ArticleVendu {
 	}
 	
 	public Enchere getMeilleureEnchere() {
-		Enchere meilleureEnchere = null;
+		Enchere meilleureEnchere = encheres.get(0);
 		for(Enchere enchere : encheres) {
 			if(enchere.getMontantEchere()>meilleureEnchere.getMontantEchere() || meilleureEnchere==null) {
 				meilleureEnchere = enchere;
@@ -198,7 +198,6 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente
-				+ ", lieuRetrait=" + lieuRetrait + ", categorieArticle=" + categorieArticle + ", enchere=" + encheres
-				+ "]";
+				+"]";
 	}
 }
