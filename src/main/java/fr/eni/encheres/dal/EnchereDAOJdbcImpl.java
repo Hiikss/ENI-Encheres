@@ -12,6 +12,7 @@ import fr.eni.encheres.bo.Utilisateur;
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String SELECT = "SELECT * FROM utilisateurs u, encheres e, articles_vendus a WHERE e.no_article=a.no_article AND a.no_article=? AND e.no_utilisateur=u.no_utilisateur";
+	private static final String INSERT ="insert into Encheres (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES(?,?,?,?);";
 	
 	@Override
 	public void select(ArticleVendu article) throws BusinessException {
@@ -37,6 +38,36 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 			throw new BusinessException(CodesResultatDAL.DELETE_UTILISATEUR_ECHEC);
 		}
+	}
+
+
+	@Override
+	public void insert(Enchere enchere) throws BusinessException {
+		if (enchere == null) {
+			throw new BusinessException(CodesResultatDAL.INSERT_OBJET_NULL);
+		}
+		BusinessException be = new BusinessException();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			
+				PreparedStatement pstmt = cnx.prepareStatement(INSERT);
+
+				
+				pstmt.setInt(1, enchere.getEncherisseur().getNoUtilisateur());
+				pstmt.setInt(2, enchere.getArticle().getNoArticle());
+				pstmt.setDate(3, java.sql.Date.valueOf(enchere.getDateEnchere()));
+				pstmt.setInt(4, enchere.getMontantEchere());
+				
+				pstmt.executeUpdate();
+				
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(e instanceof BusinessException) {
+				throw be;
+			}
+			throw new BusinessException(CodesResultatDAL.INSERT_ENCHERE_ECHEC);
+		}
+		
 	}
 
 }

@@ -68,8 +68,9 @@ public class ServletEncherir extends HttpServlet {
 			
 			
 			try {
-				//Verifier si c'est la bonne fonction
-				EnchereManager.insert(enchere);
+				EnchereManager enchereManager = new EnchereManager();
+				
+				enchereManager.insert(enchere);
 				request.setAttribute("mPrix", prixEnchere);
 				request.setAttribute("meilleureEnchere", enchere);
 

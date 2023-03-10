@@ -32,6 +32,8 @@ public abstract class CodesResultatDAL {
 		
 		public static final int LECTURE_ALLCATEGORIES_ECHEC = 10014;
 		
+		public static final int INSERT_ENCHERE_ECHEC = 10015;
+		
 		
 
 }
