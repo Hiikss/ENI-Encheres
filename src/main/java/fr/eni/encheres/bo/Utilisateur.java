@@ -16,18 +16,19 @@ public class Utilisateur {
 	private byte[] motDePasse;
 	private int credit;
 	
-	private List<ArticleVendu> vente;
-	private List<Enchere> encherit;
+	private List<ArticleVendu> ventes;
+	private List<Enchere> encheres;
 	
 	private boolean administrateur;
-
+	
+	public static List<Utilisateur> instances = new ArrayList<>();
+	
 	public Utilisateur() {
-		vente = new ArrayList<>();
-		encherit = new ArrayList<>();
+		ventes = new ArrayList<>();
+		encheres = new ArrayList<>();
+		instances.add(this);
 	}
 	
-	
-
 	/**
 	 * @param pseudo
 	 * @param nom
@@ -38,9 +39,8 @@ public class Utilisateur {
 	 * @param codePostal
 	 * @param ville
 	 */
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville) {
-		super();
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville) {
+		this();
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -50,8 +50,6 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 	}
-
-
 
 	/**
 	 * @param pseudo
@@ -64,21 +62,10 @@ public class Utilisateur {
 	 * @param ville
 	 * @param motDePasse
 	 */
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, byte[] motDePasse) {
-		super();
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse) {
+		this(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
 		this.motDePasse = motDePasse;
 	}
-
-
 
 	/**
 	 * @param noUtilisateur
@@ -94,24 +81,12 @@ public class Utilisateur {
 	 * @param credit
 	 * @param administrateur
 	 */
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) {
-		super();
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur) {
+		this(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
 		this.noUtilisateur = noUtilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-
-
 
 	/**
 	 * @param noUtilisateur
@@ -128,23 +103,10 @@ public class Utilisateur {
 	 * @param vente
 	 * @param encherit
 	 */
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, byte[] motDePasse, int credit, List<ArticleVendu> vente,
-			List<Enchere> encherit) {
-		super();
-		this.noUtilisateur = noUtilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.vente = vente;
-		this.encherit = encherit;
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, byte[] motDePasse, int credit, boolean administrateur, List<ArticleVendu> vente, List<Enchere> encherit) {
+		this(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+		this.ventes = vente;
+		this.encheres = encherit;
 		vente = new ArrayList<>();
 		encherit = new ArrayList<>();
 	}
@@ -177,10 +139,20 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.credit = credit;
-		this.vente = vente;
-		this.encherit = encherit;
+		this.ventes = vente;
+		this.encheres = encherit;
 		vente = new ArrayList<>();
 		encherit = new ArrayList<>();
+	}
+	
+	public static Utilisateur getUtilisateurIfExists(int no) {
+		Utilisateur utilisateur = null;
+		for(Utilisateur u : instances) {
+			if(u.getNoUtilisateur()==no) {
+				utilisateur = u;
+			}
+		}
+		return utilisateur;
 	}
 
 	public int getNoUtilisateur() {
@@ -271,20 +243,24 @@ public class Utilisateur {
 		this.credit = credit;
 	}
 
-	public List<ArticleVendu> getVente() {
-		return vente;
+	public List<ArticleVendu> getVentes() {
+		return ventes;
 	}
 
-	public void setVente(List<ArticleVendu> vente) {
-		this.vente = vente;
+	public void addVente(ArticleVendu vente) {
+		if(!this.ventes.contains(vente)) {
+		this.ventes.add(vente);
+		}
 	}
 
-	public List<Enchere> getEncherit() {
-		return encherit;
+	public List<Enchere> getEncheres() {
+		return encheres;
 	}
 
-	public void setEncherit(List<Enchere> encherit) {
-		this.encherit = encherit;
+	public void addEnchere(Enchere enchere) {
+		if(!this.encheres.contains(enchere)) {
+			this.encheres.add(enchere);
+		}
 	}
 
 	public boolean isAdministrateur() {
@@ -300,10 +276,6 @@ public class Utilisateur {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + ", vente="
-				+ vente + ", encherit=" + encherit + ", administrateur=" + administrateur + "]";
+				+ ventes + ", administrateur=" + administrateur + "]";
 	}
-	
-	
-	
-
 }

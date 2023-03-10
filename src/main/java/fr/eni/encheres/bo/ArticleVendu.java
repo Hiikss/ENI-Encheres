@@ -18,18 +18,58 @@ public class ArticleVendu {
 	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
 	private Categorie categorieArticle;
-	private List<Enchere> enchere;
+	private List<Enchere> encheres;
 	
-	
+	public static List<ArticleVendu> instances = new ArrayList<>();
 	
 	/**
 	 * 
 	 */
 	public ArticleVendu() {
-		enchere = new ArrayList<>();
-		
+		encheres = new ArrayList<>();
+		instances.add(this);
 	}
 		
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente) {
+		this();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+	}
+	
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param prixVente
+	 * @param etatVente
+	 * @param vendeur
+	 * @param lieuRetrait
+	 * @param categorieArticle
+	 * @param enchere
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+			int miseAPrix, int prixVente, String etatVente, Utilisateur vendeur, Retrait lieuRetrait,
+			Categorie categorieArticle, List<Enchere> encheres) {
+		this();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.vendeur = vendeur;
+		this.lieuRetrait = lieuRetrait;
+		this.categorieArticle = categorieArticle;
+		this.encheres = encheres;
+	}
 	
 	/**
 	 * @param noArticle
@@ -47,59 +87,20 @@ public class ArticleVendu {
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Utilisateur vendeur,
-			Retrait lieuRetrait, Categorie categorieArticle, List<Enchere> enchere) {
-		super();
+			Retrait lieuRetrait, Categorie categorieArticle, List<Enchere> encheres) {
+		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente, vendeur, lieuRetrait, categorieArticle, encheres);
 		this.noArticle = noArticle;
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
-		this.etatVente = etatVente;
-		this.vendeur = vendeur;
-		this.lieuRetrait = lieuRetrait;
-		this.categorieArticle = categorieArticle;
-		this.enchere = enchere;
-		enchere = new ArrayList<>();
 	}
 	
-	
-	
-	
-	/**
-	 * @param nomArticle
-	 * @param description
-	 * @param dateDebutEncheres
-	 * @param dateFinEncheres
-	 * @param miseAPrix
-	 * @param prixVente
-	 * @param etatVente
-	 * @param vendeur
-	 * @param lieuRetrait
-	 * @param categorieArticle
-	 * @param enchere
-	 */
-	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
-			int miseAPrix, int prixVente, String etatVente, Utilisateur vendeur, Retrait lieuRetrait,
-			Categorie categorieArticle, List<Enchere> enchere) {
-		super();
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
-		this.etatVente = etatVente;
-		this.vendeur = vendeur;
-		this.lieuRetrait = lieuRetrait;
-		this.categorieArticle = categorieArticle;
-		this.enchere = enchere;
-		enchere = new ArrayList<>();
+	public static ArticleVendu getArticleIfExists(int no) {
+		ArticleVendu articleVendu = null;
+		for(ArticleVendu article : instances) {
+			if(article.getNoArticle()==no) {
+				articleVendu = article;
+			}
+		}
+		return articleVendu;
 	}
-
-
-
 
 	public int getNoArticle() {
 		return noArticle;
@@ -168,31 +169,35 @@ public class ArticleVendu {
 		this.categorieArticle = categorieArticle;
 	}
 	
+	public void setEncheres(List<Enchere> encheres) {
+		this.encheres = encheres;
+	}
 	
-	
-	public List<Enchere> getEnchere() {
-		return enchere;
+	public List<Enchere> getEncheres() {
+		return encheres;
 	}
 
-
-	public void setEnchere(List<Enchere> enchere) {
-		this.enchere = enchere;
+	public void addEnchere(Enchere enchere) {
+		if(!this.encheres.contains(enchere)) {
+			this.encheres.add(enchere);
+		}
 	}
-
+	
+	public Enchere getMeilleureEnchere() {
+		Enchere meilleureEnchere = encheres.get(0);
+		for(Enchere enchere : encheres) {
+			if(enchere.getMontantEchere()>meilleureEnchere.getMontantEchere() || meilleureEnchere==null) {
+				meilleureEnchere = enchere;
+			}
+		}
+		return meilleureEnchere;
+	}
 
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", vendeur=" + vendeur
-				+ ", lieuRetrait=" + lieuRetrait + ", categorieArticle=" + categorieArticle + ", enchere=" + enchere
-				+ "]";
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente
+				+"]";
 	}
-
-
-	
-	
-	
-	
-
 }
