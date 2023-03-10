@@ -21,7 +21,6 @@
 	<section class="container-fluid">
 		<h1 class="mt-5 text-center">Détail Vente</h1>
 		<%@ include file="/WEB-INF/jsp/bandeauErreur.jspf"%>
-		<form action="<%=request.getContextPath()%>/DetailVente"%>
 
 		<%-- Vérifier si l'utilisateur est le vendeur --%>
 		<%
@@ -101,9 +100,9 @@
 			<%=article.getVendeur().getPseudo()%>
 		</div>
 
-		<form method="POST" action="encherir.jsp">
-			<input type="hidden" name="articleId"
-				value="<%=article.getNomArticle()%>">
+		<form method="post" action="<%=request.getContextPath()%>/Encherir">
+			<input type="hidden" name="noArticle"
+				value="<%=article.getNoArticle()%>">
 			<p>
 				Ma proposition :
 				<input class="form-control" type ="number" name="miseAPrix" id="miseAPrix" step="1" max="10000" value=<%if(enchere!=null){ %>
