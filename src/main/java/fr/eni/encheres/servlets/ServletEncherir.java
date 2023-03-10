@@ -38,7 +38,7 @@ public class ServletEncherir extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/jsp/detailVente.jsp").forward(request, response);
-		//Bonne jsp ??
+
 	}
 
 	/**
@@ -75,7 +75,6 @@ public class ServletEncherir extends HttpServlet {
 				UtilisateurManager utilisateurManager = new UtilisateurManager();
 				utilisateurManager.updateCredit(utilisateurConnecte);
 			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			response.sendRedirect(request.getContextPath() + "/accueil");

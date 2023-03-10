@@ -12,7 +12,7 @@ public class ArticleVendu {
 	private LocalDate dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
-	//etatVente en String ? On pourrait faire une enum ?
+	
 	private String etatVente;
 	
 	private Utilisateur vendeur;

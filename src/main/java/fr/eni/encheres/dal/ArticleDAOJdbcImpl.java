@@ -25,7 +25,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String SELECT_ALL = "select * FROM RETRAITS r, CATEGORIES c, ARTICLES_VENDUS a, UTILISATEURS u WHERE a.no_article=r.no_article AND a.no_categorie=c.no_categorie AND a.no_utilisateur=u.no_utilisateur;";
 
-	//private static final String INSERT = "INSERT INTO Articles_Vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES(?,?,?,?,?,?,?,?);";
 	private static final String UPDATE_ARTICLE = "UPDATE Articles_Vendus SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
 
 	@Override
