@@ -21,6 +21,7 @@
 	<section class="container-fluid">
 		<h1 class="mt-5 text-center">Détail Vente</h1>
 		<%@ include file="/WEB-INF/jsp/bandeauErreur.jspf"%>
+		<form action="<%=request.getContextPath()%>/DetailVente"%>
 
 		<%-- Vérifier si l'utilisateur est le vendeur --%>
 		<%
