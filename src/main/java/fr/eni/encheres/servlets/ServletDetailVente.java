@@ -34,17 +34,10 @@ public class ServletDetailVente extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("noArticle"));
 		
-		try {
-			article = ArticleManager.selectById(id);
-		} catch (BusinessException e) {
-			System.err.println(e.getMessage());
-		}
-		if (article != null) {
-			request.setAttribute("Article", article);
+		article = ArticleVendu.getArticleIfExists(id);
+		request.setAttribute("article", article);
 			
-			request.getRequestDispatcher("/WEB-INF/jsp/detailVente.jsp").forward(request, response);
-		
-		}
+		request.getRequestDispatcher("/WEB-INF/jsp/detailVente.jsp").forward(request, response);
 		
 	}
 
