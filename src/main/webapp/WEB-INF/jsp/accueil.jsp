@@ -166,12 +166,16 @@ if(request.getParameter("categorie")!=null) {
 			if((recherche==null || recherche.isBlank() || article.getNomArticle().contains(recherche)) && (categorie==0 || categorie==article.getCategorieArticle().getNoCategorie())) {
 			%>
 				<article class="col-10 col-lg-5 offset-1 offset-lg-0 article mt-4">
-					<a href=".">
+					<%if(session.getAttribute("utilisateur")!=null) {%>
+					<a href="<%=request.getContextPath()%>/DetailVente?=noArticle=<%=article.getNoArticle()%>">
+					<%}%>
 						<div><u><%=article.getNomArticle() %></u></div>
 						<div>Prix : <%=article.getMiseAPrix()%> points</div>
 						<div>Fin de l'enchère : <%=article.getDateFinEncheres().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))%></div>
 						<div>Vendeur : <a class="profil" href="<%=request.getContextPath()%>/profil?id=<%=article.getVendeur().getNoUtilisateur()%>"><%=article.getVendeur().getPseudo()%></a></div>
+					<%if(session.getAttribute("utilisateur")!=null) {%>
 					</a>
+					<%}%>
 				</article>
 				<div class="offset-lg-2"></div>
 			<%

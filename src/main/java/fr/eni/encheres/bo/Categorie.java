@@ -70,7 +70,9 @@ public class Categorie {
 		if(articles==null) {
 			articles = new ArrayList<>();
 		}
+		if(!articles.contains(article)) {
 		articles.add(article);
+		}
 	}
 
 	@Override
