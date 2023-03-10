@@ -276,6 +276,6 @@ public class Utilisateur {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + ", vente="
-				+ ventes + ", encherit=" + encheres + ", administrateur=" + administrateur + "]";
+				+ ventes + ", administrateur=" + administrateur + "]";
 	}
 }
